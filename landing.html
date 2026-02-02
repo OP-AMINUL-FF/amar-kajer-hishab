@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OP Aminul FF Ludo - Play Online Ludo Game</title>
+    <meta name="description" content="Play OP Aminul FF Ludo, a decentralized P2P online Ludo game inspired by Ludo King. Create or join rooms with 2-4 players using WebRTC. Free, no server required.">
+    <meta name="keywords" content="op ludo, op ludo aminul ff, op aminul ff ludo, online ludo, p2p ludo, webrtc ludo, ludo king style">
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="OP Aminul FF Ludo - Decentralized Online Ludo Game">
+    <meta property="og:description" content="Join the fun with OP Aminul FF Ludo! Play with friends in real-time using P2P technology. No backend needed.">
+    <meta property="og:image" content="https://example.com/op-ludo-preview.png"> <!-- Replace with actual preview image URL from CDN -->
+    <meta property="og:url" content="https://your-site-url.com"> <!-- Replace with hosted URL -->
+    <meta property="og:type" content="game">
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="OP Aminul FF Ludo - Play Now!">
+    <meta name="twitter:description" content="Experience Ludo King style gameplay in a P2P online Ludo game by OP Aminul FF.">
+    <meta name="twitter:image" content="https://example.com/op-ludo-preview.png"> <!-- Replace with actual image -->
+    <!-- Schema.org Game Markup -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Game",
+      "name": "OP Aminul FF Ludo",
+      "description": "A decentralized P2P Ludo game inspired by Ludo King, built with HTML, CSS, and JS.",
+      "genre": "Board Game",
+      "numberOfPlayers": {
+        "@type": "QuantitativeValue",
+        "minValue": 2,
+        "maxValue": 4
+      },
+      "url": "https://your-site-url.com" <!-- Replace with hosted URL -->
+    }
+    </script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to bottom, #ff7e5f, #feb47b);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+        }
+        .container {
+            max-width: 600px;
+            padding: 20px;
+        }
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        .button {
+            display: block;
+            width: 100%;
+            max-width: 300px;
+            margin: 15px auto;
+            padding: 15px;
+            font-size: 1.5em;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        .button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+        }
+        #create-btn {
+            background: #4CAF50;
+            color: white;
+        }
+        #join-btn {
+            background: #2196F3;
+            color: white;
+        }
+        #name-input {
+            width: 100%;
+            max-width: 300px;
+            margin: 15px auto;
+            padding: 10px;
+            font-size: 1.2em;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            display: block;
+        }
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+            .button {
+                font-size: 1.2em;
+                padding: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>OP Aminul FF Ludo</h1>
+        <input type="text" id="name-input" placeholder="Enter your name">
+        <button id="create-btn" class="button">Create Room</button>
+        <button id="join-btn" class="button">Join Room</button>
+    </div>
+    <script>
+        // Basic JS for landing page - will expand in later steps
+        const createBtn = document.getElementById('create-btn');
+        const joinBtn = document.getElementById('join-btn');
+        const nameInput = document.getElementById('name-input');
+
+        // Prompt for name if empty on button click
+        function checkName() {
+            let name = nameInput.value.trim();
+            if (!name) {
+                name = prompt('Please enter your name:');
+                if (name) nameInput.value = name;
+            }
+            return name;
+        }
+
+        createBtn.addEventListener('click', () => {
+            if (checkName()) {
+                alert('Create Room functionality coming in next steps!');
+                // In future steps, switch to create room section
+            }
+        });
+
+        joinBtn.addEventListener('click', () => {
+            if (checkName()) {
+                alert('Join Room functionality coming in next steps!');
+                // In future steps, switch to join room section
+            }
+        });
+
+        // Save name to localStorage for persistence
+        if (localStorage.getItem('playerName')) {
+            nameInput.value = localStorage.getItem('playerName');
+        }
+        nameInput.addEventListener('change', () => {
+            localStorage.setItem('playerName', nameInput.value.trim());
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OP Aminul FF Ludo - Play Online Ludo Game</title>
+    <meta name="description" content="Play OP Aminul FF Ludo, a decentralized P2P online Ludo game inspired by Ludo King. Create or join rooms with 2-4 players using WebRTC. Free, no server required.">
+    <meta name="keywords" content="op ludo, op ludo aminul ff, op aminul ff ludo, online ludo, p2p ludo, webrtc ludo, ludo king style">
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="OP Aminul FF Ludo - Decentralized Online Ludo Game">
+    <meta property="og:description" content="Join the fun with OP Aminul FF Ludo! Play with friends in real-time using P2P technology. No backend needed.">
+    <meta property="og:image" content="https://png.pngtree.com/png-clipart/20230401/ourmid/pngtree-ludo-board-game-png-image_6682444.png">
+    <meta property="og:url" content="https://your-site-url.com">
+    <meta property="og:type" content="game">
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="OP Aminul FF Ludo - Play Now!">
+    <meta name="twitter:description" content="Experience Ludo King style gameplay in a P2P online Ludo game by OP Aminul FF.">
+    <meta name="twitter:image" content="https://png.pngtree.com/png-clipart/20230401/ourmid/pngtree-ludo-board-game-png-image_6682444.png">
+    <!-- Schema.org Game Markup -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Game",
+      "name": "OP Aminul FF Ludo",
+      "description": "A decentralized P2P Ludo game inspired by Ludo King, built with HTML, CSS, and JS.",
+      "genre": "Board Game",
+      "numberOfPlayers": {
+        "@type": "QuantitativeValue",
+        "minValue": 2,
+        "maxValue": 4
+      },
+      "url": "https://your-site-url.com"
+    }
+    </script>
+    <!-- QRCode.js CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <!-- canvas-confetti CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to bottom, #ff7e5f, #feb47b);
+            min-height: 100vh;
+            color: white;
+            text-align: center;
+        }
+        .section {
+            display: none;
+            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .active {
+            display: block;
+        }
+        h1, h2 {
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        .button {
+            display: block;
+            width: 100%;
+            max-width: 300px;
+            margin: 15px auto;
+            padding: 15px;
+            font-size: 1.5em;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            color: white;
+        }
+        .button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+        }
+        #create-btn { background: #4CAF50; }
+        #join-btn { background: #2196F3; }
+        #player-count-select {
+            width: 100%;
+            max-width: 300px;
+            padding: 10px;
+            font-size: 1.2em;
+            margin: 15px auto;
+            border-radius: 5px;
+        }
+        #offer-code {
+            font-size: 1.8em;
+            background: rgba(0,0,0,0.3);
+            padding: 10px;
+            border-radius: 10px;
+            word-break: break-all;
+            margin: 20px 0;
+        }
+        #qr-code {
+            margin: 20px auto;
+            background: white;
+            padding: 10px;
+            display: inline-block;
+            border-radius: 10px;
+        }
+        input[type="text"] {
+            width: 100%;
+            max-width: 300px;
+            padding: 10px;
+            font-size: 1.2em;
+            margin: 10px auto;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            display: block;
+        }
+        #name-input {
+            margin-bottom: 20px;
+        }
+        .hidden { display: none; }
+        #lobby-status {
+            font-size: 1.4em;
+            margin: 20px 0;
+        }
+        .loading {
+            border: 8px solid #f3f3f3;
+            border-top: 8px solid #3498db;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        @media (max-width: 768px) {
+            h1 { font-size: 2em; }
+            .button { font-size: 1.2em; padding: 12px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Landing Page Section -->
+    <div id="landing" class="section active">
+        <h1>OP Aminul FF Ludo</h1>
+        <input type="text" id="name-input" placeholder="Enter your name">
+        <button id="create-btn" class="button">Create Room</button>
+        <button id="join-btn" class="button">Join Room</button>
+    </div>
+
+    <!-- Create Room Section -->
+    <div id="create-room" class="section">
+        <h2>Create Room - OP Aminul FF Ludo</h2>
+        <select id="player-count-select">
+            <option value="2">2 Players</option>
+            <option value="3">3 Players</option>
+            <option value="4" selected>4 Players</option>
+        </select>
+        <button id="generate-offer" class="button" style="background: #FF9800;">Generate Room Code</button>
+        <div id="offer-display" class="hidden">
+            <p>Your Room Code (Share this):</p>
+            <div id="offer-code"></div>
+            <div id="qr-code"></div>
+            <p>Waiting for players to join...</p>
+            <div class="loading"></div>
+            <div id="lobby-status">Waiting for players... (1/ selected ) joined</div>
+            <button id="start-game-btn" class="button hidden" style="background: #9C27B0;">Start Game (Host Only)</button>
+        </div>
+        <button id="back-to-landing-create" class="button" style="background: #f44336;">Back</button>
+    </div>
+
+    <!-- Join Room Section -->
+    <div id="join-room" class="section">
+        <h2>Join Room - OP Aminul FF Ludo</h2>
+        <input type="text" id="join-code-input" placeholder="Paste Room Code here">
+        <button id="join-room-btn" class="button" style="background: #4CAF50;">Join Room</button>
+        <div id="join-status" class="hidden">
+            <p>Joining room...</p>
+            <div class="loading"></div>
+        </div>
+        <button id="back-to-landing-join" class="button" style="background: #f44336;">Back</button>
+    </div>
+
+    <script>
+        // Global variables for later steps (P2P, game state etc.)
+        let playerName = '';
+        let isHost = false;
+        let maxPlayers = 4;
+        let joinedPlayers = 1; // host counts as 1
+        let roomCode = ''; // will be the offer SDP in base64 or short code in future
+
+        const sections = {
+            landing: document.getElementById('landing'),
+            createRoom: document.getElementById('create-room'),
+            joinRoom: document.getElementById('join-room')
+        };
+
+        function switchSection(sectionId) {
+            Object.values(sections).forEach(sec => sec.classList.remove('active'));
+            sections[sectionId].classList.add('active');
+        }
+
+        // Name handling
+        const nameInput = document.getElementById('name-input');
+        if (localStorage.getItem('playerName')) {
+            nameInput.value = localStorage.getItem('playerName');
+        }
+        nameInput.addEventListener('change', () => {
+            playerName = nameInput.value.trim();
+            if (playerName) localStorage.setItem('playerName', playerName);
+        });
+
+        function checkName() {
+            playerName = nameInput.value.trim();
+            if (!playerName) {
+                playerName = prompt('Please enter your name:');
+                if (playerName) {
+                    nameInput.value = playerName;
+                    localStorage.setItem('playerName', playerName);
+                }
+            }
+            return !!playerName;
+        }
+
+        // Create Room
+        document.getElementById('create-btn').addEventListener('click', () => {
+            if (checkName()) {
+                switchSection('createRoom');
+            }
+        });
+
+        // Generate Offer (simulated for now - real WebRTC in later steps)
+        document.getElementById('generate-offer').addEventListener('click', () => {
+            maxPlayers = parseInt(document.getElementById('player-count-select').value);
+            // In real impl: create RTCPeerConnection, createOffer, setLocalDescription
+            // For now simulate a room code
+            roomCode = 'ROOM-' + Math.random().toString(36).substr(2, 8).toUpperCase();
+            document.getElementById('offer-code').textContent = roomCode;
+            document.getElementById('offer-display').classList.remove('hidden');
+
+            // QR Code
+            new QRCode(document.getElementById('qr-code'), {
+                text: roomCode,
+                width: 200,
+                height: 200,
+                colorDark : "#000000",
+                colorLight : "#ffffff",
+                correctLevel : QRCode.CorrectLevel.H
+            });
+
+            updateLobbyStatus();
+            isHost = true;
+        });
+
+        function updateLobbyStatus() {
+            document.getElementById('lobby-status').textContent = 
+                `Waiting for players... (\( {joinedPlayers}/ \){maxPlayers} joined)`;
+            if (joinedPlayers >= maxPlayers) {
+                document.getElementById('start-game-btn').classList.remove('hidden');
+            }
+        }
+
+        // Simulated join (real P2P signaling via copy-paste offer/answer in later steps)
+        document.getElementById('join-room-btn').addEventListener('click', () => {
+            const code = document.getElementById('join-code-input').value.trim();
+            if (!code) return alert('Please enter room code');
+            if (!checkName()) return;
+            // Simulate joining
+            document.getElementById('join-status').classList.remove('hidden');
+            setTimeout(() => {
+                alert('Joined room! (P2P connection simulated - full impl in next steps)');
+                // In future: show lobby or game
+            }, 1500);
+        });
+
+        // Back buttons
+        document.getElementById('back-to-landing-create').addEventListener('click', () => switchSection('landing'));
+        document.getElementById('back-to-landing-join').addEventListener('click', () => switchSection('landing'));
+
+        // Join button from landing
+        document.getElementById('join-btn').addEventListener('click', () => {
+            if (checkName()) {
+                switchSection('joinRoom');
+            }
+        });
+
+        // Placeholder for start game
+        document.getElementById('start-game-btn').addEventListener('click', () => {
+            if (joinedPlayers < maxPlayers) return alert('Not enough players yet!');
+            alert('Game starting! (Game board coming in step 5+)');
+            // In future steps: switch to game board section
+        });
+    </script>
+</body>
+</html>

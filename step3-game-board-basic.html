@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OP Aminul FF Ludo - Play Online Ludo Game</title>
+    <meta name="description" content="Play OP Aminul FF Ludo, a decentralized P2P online Ludo game inspired by Ludo King. Create or join rooms with 2-4 players using WebRTC. Free, no server required.">
+    <meta name="keywords" content="op ludo, op ludo aminul ff, op aminul ff ludo, online ludo, p2p ludo, webrtc ludo, ludo king style">
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="OP Aminul FF Ludo - Decentralized Online Ludo Game">
+    <meta property="og:description" content="Join the fun with OP Aminul FF Ludo! Play with friends in real-time using P2P technology. No backend needed.">
+    <meta property="og:image" content="https://png.pngtree.com/png-clipart/20230401/ourmid/pngtree-ludo-board-game-png-image_6682444.png">
+    <meta property="og:url" content="https://your-site-url.com">
+    <meta property="og:type" content="game">
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="OP Aminul FF Ludo - Play Now!">
+    <meta name="twitter:description" content="Experience Ludo King style gameplay in a P2P online Ludo game by OP Aminul FF.">
+    <meta name="twitter:image" content="https://png.pngtree.com/png-clipart/20230401/ourmid/pngtree-ludo-board-game-png-image_6682444.png">
+    <!-- Schema.org Game Markup -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Game",
+      "name": "OP Aminul FF Ludo",
+      "description": "A decentralized P2P Ludo game inspired by Ludo King, built with HTML, CSS, and JS.",
+      "genre": "Board Game",
+      "numberOfPlayers": {
+        "@type": "QuantitativeValue",
+        "minValue": 2,
+        "maxValue": 4
+      },
+      "url": "https://your-site-url.com"
+    }
+    </script>
+    <!-- QRCode.js CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <!-- canvas-confetti CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+    <!-- Emoji Picker CDN (simple one) -->
+    <script src="https://cdn.jsdelivr.net/npm/@joeattardi/emoji-button@latest/dist/index.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to bottom, #ff7e5f, #feb47b);
+            min-height: 100vh;
+            color: white;
+            text-align: center;
+        }
+        .section {
+            display: none;
+            padding: 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .active {
+            display: block;
+        }
+        h1, h2 {
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        .button {
+            display: inline-block;
+            padding: 12px 24px;
+            font-size: 1.3em;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            color: white;
+            margin: 10px;
+        }
+        .button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+        }
+        #create-btn { background: #4CAF50; }
+        #join-btn { background: #2196F3; }
+        #player-count-select, input[type="text"], select {
+            padding: 12px;
+            font-size: 1.2em;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            margin: 10px;
+            width: 80%;
+            max-width: 400px;
+        }
+        #game-board-section {
+            position: relative;
+            background: url('https://www.publicdomainpictures.net/pictures/70000/velka/ludo-board.jpg') center/cover no-repeat;
+            height: 90vh;
+            max-height: 800px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+        }
+        .piece {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.5s ease-in-out;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+            background-size: cover;
+            background-position: center;
+        }
+        .red { background: url('https://img.freepik.com/free-vector/red-pawn-chess-piece_1053-170.jpg') center/cover; }
+        .blue { background: url('https://img.freepik.com/free-vector/blue-pawn-chess-piece_1053-171.jpg') center/cover; }
+        .green { background: url('https://img.freepik.com/free-vector/green-pawn-chess-piece_1053-172.jpg') center/cover; }
+        .yellow { background: url('https://img.freepik.com/free-vector/yellow-pawn-chess-piece_1053-173.jpg') center/cover; }
+        /* Note: Above pawn URLs are placeholders; in real use find better transparent PNGs like from pngtree or vecteezy direct links */
+        #dice {
+            width: 100px;
+            height: 100px;
+            background: white;
+            border-radius: 15px;
+            margin: 20px auto;
+            font-size: 4em;
+            line-height: 100px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+            cursor: pointer;
+            user-select: none;
+        }
+        #current-turn {
+            font-size: 1.8em;
+            margin: 15px;
+            padding: 10px;
+            background: rgba(0,0,0,0.4);
+            border-radius: 10px;
+        }
+        #chat-box {
+            position: fixed;
+            bottom: 10px;
+            left: 10px;
+            width: 300px;
+            height: 200px;
+            background: rgba(255,255,255,0.9);
+            border-radius: 10px;
+            overflow: hidden;
+            color: black;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        #chat-messages {
+            height: 160px;
+            overflow-y: auto;
+            padding: 10px;
+        }
+        #chat-input {
+            width: 100%;
+            padding: 8px;
+            border: none;
+            border-top: 1px solid #ddd;
+        }
+        .emoji-picker {
+            position: absolute;
+            bottom: 50px;
+            left: 10px;
+        }
+        .loading { /* same as before */ 
+            border: 8px solid #f3f3f3; border-top: 8px solid #3498db; border-radius: 50%;
+            width: 50px; height: 50px; animation: spin 1s linear infinite; margin: 20px auto;
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        @media (max-width: 768px) {
+            #game-board-section { height: 80vh; }
+            .piece { width: 30px; height: 30px; }
+            #dice { width: 80px; height: 80px; font-size: 3em; line-height: 80px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Previous sections: landing, create-room, join-room (kept from step 2) -->
+    <div id="landing" class="section active">
+        <h1>OP Aminul FF Ludo</h1>
+        <input type="text" id="name-input" placeholder="Enter your name">
+        <button id="create-btn" class="button">Create Room</button>
+        <button id="join-btn" class="button">Join Room</button>
+    </div>
+
+    <div id="create-room" class="section">
+        <h2>Create Room</h2>
+        <select id="player-count-select">
+            <option value="2">2 Players</option>
+            <option value="3">3 Players</option>
+            <option value="4" selected>4 Players</option>
+        </select>
+        <button id="generate-offer" class="button" style="background:#FF9800;">Generate Room Code</button>
+        <div id="offer-display" class="hidden">
+            <p>Your Room Code:</p>
+            <div id="offer-code" style="font-size:1.8em; background:rgba(0,0,0,0.3);padding:10px;border-radius:10px;"></div>
+            <div id="qr-code" style="margin:20px auto;"></div>
+            <p>Waiting for players...</p>
+            <div class="loading"></div>
+            <div id="lobby-status"></div>
+        </div>
+        <button id="back-to-landing-create" class="button" style="background:#f44336;">Back</button>
+    </div>
+
+    <div id="join-room" class="section">
+        <h2>Join Room</h2>
+        <input type="text" id="join-code-input" placeholder="Paste Room Code">
+        <button id="join-room-btn" class="button" style="background:#4CAF50;">Join</button>
+        <div id="join-status" class="hidden"><p>Joining...</p><div class="loading"></div></div>
+        <button id="back-to-landing-join" class="button" style="background:#f44336;">Back</button>
+    </div>
+
+    <!-- New: Game Board Section -->
+    <div id="game-board" class="section">
+        <h2>OP Aminul FF Ludo Game</h2>
+        <div id="current-turn">Waiting for game to start...</div>
+        <div id="dice">🎲</div>
+        <div id="game-board-section">
+            <!-- Pieces will be added via JS -->
+        </div>
+        <div id="game-log" style="margin-top:20px; background:rgba(0,0,0,0.4); padding:10px; border-radius:10px; max-height:150px; overflow-y:auto; text-align:left;"></div>
+        <!-- Chat Box -->
+        <div id="chat-box">
+            <div id="chat-messages"></div>
+            <input type="text" id="chat-input" placeholder="Type message or emoji...">
+        </div>
+        <button id="back-to-lobby" class="button" style="background:#f44336; margin-top:20px;">Leave Game</button>
+    </div>
+
+    <script>
+        // Extending previous code...
+        let playerName = localStorage.getItem('playerName') || '';
+        let isHost = false;
+        let maxPlayers = 4;
+        let currentPlayers = [];
+        let gameStarted = false;
+        let currentTurn = 0; // 0 = red, 1 = blue, etc.
+        let colors = ['red', 'blue', 'green', 'yellow'];
+        let playerColors = {}; // playerName -> color
+
+        const sections = {
+            landing: document.getElementById('landing'),
+            createRoom: document.getElementById('create-room'),
+            joinRoom: document.getElementById('join-room'),
+            gameBoard: document.getElementById('game-board')
+        };
+
+        function switchSection(id) {
+            Object.values(sections).forEach(s => s.classList.remove('active'));
+            sections[id].classList.add('active');
+        }
+
+        // Name handling (same)
+        const nameInput = document.getElementById('name-input');
+        nameInput.value = playerName;
+        nameInput.addEventListener('change', () => {
+            playerName = nameInput.value.trim();
+            if (playerName) localStorage.setItem('playerName', playerName);
+        });
+
+        function checkName() {
+            if (!playerName) {
+                playerName = prompt('Enter your name:') || '';
+                nameInput.value = playerName;
+                localStorage.setItem('playerName', playerName);
+            }
+            return !!playerName;
+        }
+
+        // Create / Join logic (simplified, P2P stub)
+        document.getElementById('create-btn').onclick = () => { if (checkName()) switchSection('createRoom'); };
+        document.getElementById('join-btn').onclick = () => { if (checkName()) switchSection('joinRoom'); };
+
+        document.getElementById('generate-offer').onclick = () => {
+            maxPlayers = parseInt(document.getElementById('player-count-select').value);
+            const code = 'ROOM-' + Math.random().toString(36).substring(2,10).toUpperCase();
+            document.getElementById('offer-code').textContent = code;
+            document.getElementById('offer-display').classList.remove('hidden');
+            new QRCode(document.getElementById("qr-code"), { text: code, width: 180, height: 180 });
+            isHost = true;
+            currentPlayers = [{name: playerName, color: 'red'}];
+            updateLobby();
+        };
+
+        function updateLobby() {
+            document.getElementById('lobby-status').textContent = `Players: \( {currentPlayers.length}/ \){maxPlayers} - Waiting...`;
+        }
+
+        // Join stub
+        document.getElementById('join-room-btn').onclick = () => {
+            const code = document.getElementById('join-code-input').value.trim();
+            if (code && checkName()) {
+                document.getElementById('join-status').classList.remove('hidden');
+                setTimeout(() => {
+                    alert('Joined! (P2P connection stub)');
+                    startGameSimulation();
+                }, 1000);
+            }
+        };
+
+        // Back buttons...
+        document.querySelectorAll('[id^="back-to-landing"]').forEach(btn => {
+            btn.onclick = () => switchSection('landing');
+        });
+
+        // Game start simulation (for step 3 - basic board & pieces)
+        function startGameSimulation() {
+            switchSection('gameBoard');
+            gameStarted = true;
+            document.getElementById('current-turn').textContent = `Turn: ${colors[currentTurn].toUpperCase()}`;
+            addPieces();
+            logMessage('Game Started! Roll the dice.');
+        }
+
+        function addPieces() {
+            const board = document.getElementById('game-board-section');
+            // Simple positions for demo (real path logic later)
+            const positions = [
+                {left: '10%', top: '10%'}, {left: '20%', top: '10%'},
+                {left: '10%', top: '20%'}, {left: '20%', top: '20%'}
+            ];
+            colors.forEach((color, i) => {
+                for (let j = 0; j < 4; j++) {
+                    const piece = document.createElement('div');
+                    piece.className = `piece ${color}`;
+                    piece.style.left = positions[j].left;
+                    piece.style.top = positions[j].top;
+                    piece.dataset.player = color;
+                    piece.dataset.id = j;
+                    piece.onclick = () => selectPiece(color, j);
+                    board.appendChild(piece);
+                }
+            });
+        }
+
+        function selectPiece(color, id) {
+            if (colors[currentTurn] !== color) return alert("Not your turn!");
+            logMessage(`${color.toUpperCase()} piece ${id+1} selected! (Move logic coming soon)`);
+            // Later: animate move along path
+        }
+
+        document.getElementById('dice').onclick = () => {
+            if (!gameStarted || colors[currentTurn] !== 'red') return; // only host/red for demo
+            const roll = Math.floor(Math.random() * 6) + 1;
+            document.getElementById('dice').textContent = roll;
+            logMessage(`Rolled: ${roll}`);
+            // Play sound stub
+            // new Audio('https://assets.mixkit.co/sfx/preview/mixkit-dice-roll-...').play(); find real URL
+            setTimeout(() => {
+                currentTurn = (currentTurn + 1) % currentPlayers.length;
+                document.getElementById('current-turn').textContent = `Turn: ${colors[currentTurn].toUpperCase()}`;
+            }, 1000);
+        };
+
+        function logMessage(msg) {
+            const log = document.getElementById('game-log');
+            log.innerHTML += `<p>${msg}</p>`;
+            log.scrollTop = log.scrollHeight;
+        }
+
+        // Chat simple (local for now)
+        const chatInput = document.getElementById('chat-input');
+        chatInput.addEventListener('keypress', e => {
+            if (e.key === 'Enter' && chatInput.value.trim()) {
+                logMessage(`You: ${chatInput.value}`);
+                document.getElementById('chat-messages').innerHTML += `<p>You: ${chatInput.value}</p>`;
+                chatInput.value = '';
+            }
+        });
+
+        // Emoji picker stub
+        // const picker = new EmojiButton();
+        // picker.on('emoji', emoji => chatInput.value += emoji.emoji);
+        // document.getElementById('chat-box').appendChild(picker.picker);
+
+        // Placeholder for confetti on win (later)
+    </script>
+</body>
+</html>

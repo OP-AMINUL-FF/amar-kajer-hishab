@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OP Aminul FF Ludo - Play Online Ludo Game</title>
+    <meta name="description" content="Play OP Aminul FF Ludo, a decentralized P2P online Ludo game inspired by Ludo King. Create or join rooms with 2-4 players using WebRTC. Free, no server required.">
+    <meta name="keywords" content="op ludo, op ludo aminul ff, op aminul ff ludo, online ludo, p2p ludo, webrtc ludo, ludo king style">
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="OP Aminul FF Ludo - Decentralized Online Ludo Game">
+    <meta property="og:description" content="Join the fun with OP Aminul FF Ludo! Play with friends in real-time using P2P technology. No backend needed.">
+    <meta property="og:image" content="https://png.pngtree.com/png-clipart/20230401/ourmid/pngtree-ludo-board-game-png-image_6682444.png">
+    <meta property="og:url" content="https://your-site-url.com">
+    <meta property="og:type" content="game">
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="OP Aminul FF Ludo - Play Now!">
+    <meta name="twitter:description" content="Experience Ludo King style gameplay in a P2P online Ludo game by OP Aminul FF.">
+    <meta name="twitter:image" content="https://png.pngtree.com/png-clipart/20230401/ourmid/pngtree-ludo-board-game-png-image_6682444.png">
+    <!-- Schema.org Game Markup -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Game",
+      "name": "OP Aminul FF Ludo",
+      "description": "A decentralized P2P Ludo game inspired by Ludo King, built with HTML, CSS, and JS.",
+      "genre": "Board Game",
+      "numberOfPlayers": {
+        "@type": "QuantitativeValue",
+        "minValue": 2,
+        "maxValue": 4
+      },
+      "url": "https://your-site-url.com"
+    }
+    </script>
+    <!-- QRCode.js CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <!-- canvas-confetti CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+    <!-- Emoji Picker CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@joeattardi/emoji-button@latest/dist/index.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to bottom, #ff7e5f, #feb47b);
+            min-height: 100vh;
+            color: white;
+            text-align: center;
+        }
+        .section {
+            display: none;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .active {
+            display: block;
+        }
+        h1, h2, h3 {
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        .button {
+            display: inline-block;
+            padding: 12px 24px;
+            font-size: 1.3em;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            color: white;
+            margin: 10px;
+        }
+        .button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+        }
+        #create-btn { background: #4CAF50; }
+        #join-btn { background: #2196F3; }
+        select, input[type="text"] {
+            padding: 12px;
+            font-size: 1.2em;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            margin: 10px;
+            width: 80%;
+            max-width: 400px;
+        }
+        #game-board-section {
+            position: relative;
+            width: 90vmin;
+            height: 90vmin;
+            max-width: 800px;
+            max-height: 800px;
+            margin: 20px auto;
+            background: url('https://www.publicdomainpictures.net/pictures/70000/velka/ludo-board.jpg') center/cover no-repeat;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+        }
+        .piece {
+            position: absolute;
+            width: 6vmin;
+            height: 6vmin;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+            background-size: cover;
+            background-position: center;
+            z-index: 10;
+            animation: bounce 0.8s infinite alternate;
+        }
+        @keyframes bounce {
+            from { transform: translateY(0) scale(1); }
+            to { transform: translateY(-10px) scale(1.05); }
+        }
+        .red    { background: radial-gradient(circle, #ff4d4d, #cc0000); border: 2px solid #fff; }
+        .blue   { background: radial-gradient(circle, #4da6ff, #0066cc); border: 2px solid #fff; }
+        .green  { background: radial-gradient(circle, #4dff4d, #00cc00); border: 2px solid #fff; }
+        .yellow { background: radial-gradient(circle, #ffff4d, #cccc00); border: 2px solid #fff; }
+        .piece::after {
+            content: attr(data-num);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2.5vmin;
+            font-weight: bold;
+            color: white;
+            text-shadow: 1px 1px 2px black;
+        }
+        #dice {
+            width: 120px;
+            height: 120px;
+            background: #fff url('https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Two_red_dice_01.svg/120px-Two_red_dice_01.svg.png') center/cover;
+            border-radius: 15px;
+            margin: 20px auto;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+            cursor: pointer;
+            font-size: 4em;
+            line-height: 120px;
+            color: black;
+            transition: transform 0.3s;
+        }
+        #dice.rolling {
+            animation: roll 1.2s linear;
+        }
+        @keyframes roll {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(1440deg); }
+        }
+        #current-turn {
+            font-size: 1.8em;
+            margin: 15px;
+            padding: 10px;
+            background: rgba(0,0,0,0.4);
+            border-radius: 10px;
+        }
+        #chat-box {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            width: 320px;
+            height: 260px;
+            background: rgba(255,255,255,0.95);
+            border-radius: 10px;
+            overflow: hidden;
+            color: black;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+            z-index: 100;
+        }
+        #chat-messages {
+            height: 210px;
+            overflow-y: auto;
+            padding: 10px;
+            font-size: 0.9em;
+        }
+        #chat-input-container {
+            display: flex;
+            border-top: 1px solid #ddd;
+        }
+        #chat-input {
+            flex: 1;
+            padding: 8px;
+            border: none;
+        }
+        #emoji-btn {
+            padding: 8px 12px;
+            background: #eee;
+            border: none;
+            cursor: pointer;
+        }
+        .loading {
+            border: 8px solid #f3f3f3;
+            border-top: 8px solid #3498db;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        #ad-placeholder {
+            margin: 20px auto;
+            width: 728px;
+            height: 90px;
+            background: rgba(0,0,0,0.2);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2em;
+        }
+        #rankings {
+            margin: 20px auto;
+            background: rgba(0,0,0,0.4);
+            padding: 15px;
+            border-radius: 10px;
+            max-width: 800px;
+            text-align: left;
+        }
+        #rankings h3 { margin-top: 0; }
+        .rank-item { margin: 8px 0; font-size: 1.1em; }
+        @media (max-width: 768px) {
+            #game-board-section { width: 95vw; height: 95vw; }
+            .piece { width: 7vw; height: 7vw; }
+            #dice { width: 100px; height: 100px; font-size: 3em; line-height: 100px; }
+            #chat-box { width: 90%; right: 5%; height: 220px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Previous sections kept -->
+    <div id="landing" class="section active">
+        <h1>OP Aminul FF Ludo</h1>
+        <input type="text" id="name-input" placeholder="Enter your name">
+        <button id="create-btn" class="button">Create Room</button>
+        <button id="join-btn" class="button">Join Room</button>
+    </div>
+
+    <div id="create-room" class="section">
+        <h2>Create Room - OP Aminul FF</h2>
+        <select id="player-count-select">
+            <option value="2">2 Players</option>
+            <option value="3">3 Players</option>
+            <option value="4" selected>4 Players</option>
+        </select>
+        <button id="generate-offer" class="button" style="background:#FF9800;">Generate Room Code</button>
+        <div id="offer-display" class="hidden">
+            <p>Your Room Code (Share with friends):</p>
+            <div id="offer-code" style="font-size:1.8em;background:rgba(0,0,0,0.3);padding:10px;border-radius:10px;word-break:break-all;"></div>
+            <div id="qr-code" style="margin:20px auto;background:white;padding:10px;border-radius:10px;"></div>
+            <p>Waiting for players to join...</p>
+            <div class="loading"></div>
+            <div id="lobby-status">Waiting for players... (1/X joined)</div>
+        </div>
+        <button id="back-to-landing-create" class="button" style="background:#f44336;">Back</button>
+    </div>
+
+    <div id="join-room" class="section">
+        <h2>Join Room - OP Aminul FF</h2>
+        <input type="text" id="join-code-input" placeholder="Paste Room Code here">
+        <button id="join-room-btn" class="button" style="background:#4CAF50;">Join Room</button>
+        <div id="join-status" class="hidden"><p>Joining room...</p><div class="loading"></div></div>
+        <button id="back-to-landing-join" class="button" style="background:#f44336;">Back</button>
+    </div>
+
+    <!-- Game Board with ranking display -->
+    <div id="game-board" class="section">
+        <h2>OP Aminul FF Ludo - Game Room</h2>
+        <div id="current-turn">Waiting for turn...</div>
+        <div id="dice">Roll 🎲</div>
+        <div id="game-board-section"></div>
+
+        <div id="rankings">
+            <h3>Rankings</h3>
+            <div id="rank-list"></div>
+        </div>
+
+        <div id="game-log" style="margin:20px auto; width:90%; max-width:800px; background:rgba(0,0,0,0.4); padding:15px; border-radius:10px; max-height:180px; overflow-y:auto; text-align:left; font-size:0.95em;"></div>
+        
+        <div id="chat-box">
+            <div id="chat-messages"></div>
+            <div id="chat-input-container">
+                <input type="text" id="chat-input" placeholder="Type message or emoji...">
+                <button id="emoji-btn">😊</button>
+            </div>
+        </div>
+
+        <div id="ad-placeholder">
+            <!-- Paste your AdSense or Adsterra banner code here (e.g., 728x90) -->
+            Ad Space Placeholder - Add Monetization Code
+        </div>
+
+        <button id="back-to-lobby" class="button" style="background:#f44336;">Leave Game</button>
+    </div>
+
+    <script>
+        // Global state - adding ranking system like Ludo King
+        let playerName = localStorage.getItem('playerName') || '';
+        let isHost = false;
+        let maxPlayers = 4;
+        let players = []; // {name, color, colorIndex, pieces: [-1,-1,-1,-1], finished: false, rank: 0}
+        let currentTurnIndex = 0;
+        let gameStarted = false;
+        let selectedPlayerIndex = -1;
+        let selectedPieceIndex = -1;
+        let colors = ['red', 'blue', 'green', 'yellow'];
+        let diceRolled = false;
+        let rollValue = 0;
+        let finishedPlayers = 0;
+        let nextRank = 1;
+
+        // Path approximation (52 common positions)
+        const path = [];
+        for (let i = 0; i < 52; i++) {
+            const angle = (i * 360 / 52 + 45) * Math.PI / 180; // offset for better alignment
+            const radius = 38;
+            path.push({
+                left: `calc(50% + ${radius * Math.cos(angle)}%)`,
+                top: `calc(50% + ${radius * Math.sin(angle)}%)`
+            });
+        }
+
+        const sections = {
+            landing: document.getElementById('landing'),
+            createRoom: document.getElementById('create-room'),
+            joinRoom: document.getElementById('join-room'),
+            gameBoard: document.getElementById('game-board')
+        };
+
+        function switchSection(id) {
+            Object.values(sections).forEach(s => s.classList.remove('active'));
+            sections[id].classList.add('active');
+        }
+
+        const nameInput = document.getElementById('name-input');
+        nameInput.value = playerName;
+        nameInput.addEventListener('change', () => {
+            playerName = nameInput.value.trim();
+            if (playerName) localStorage.setItem('playerName', playerName);
+        });
+
+        function checkName() {
+            if (!playerName) {
+                playerName = prompt('Please enter your name:')?.trim() || '';
+                nameInput.value = playerName;
+                localStorage.setItem('playerName', playerName);
+            }
+            return !!playerName;
+        }
+
+        document.getElementById('create-btn').onclick = () => { if (checkName()) switchSection('createRoom'); };
+        document.getElementById('join-btn').onclick = () => { if (checkName()) switchSection('joinRoom'); };
+
+        document.getElementById('generate-offer').onclick = () => {
+            maxPlayers = parseInt(document.getElementById('player-count-select').value);
+            const code = 'OPLUDO-' + Math.random().toString(36).substring(2,9).toUpperCase();
+            document.getElementById('offer-code').textContent = code;
+            document.getElementById('offer-display').classList.remove('hidden');
+            new QRCode(document.getElementById("qr-code"), { text: code, width: 200, height: 200 });
+            isHost = true;
+            players = [{name: playerName, color: colors[0], colorIndex: 0, pieces: [-1,-1,-1,-1], finished: false, rank: 0}];
+            updateLobbyStatus();
+        };
+
+        function updateLobbyStatus() {
+            document.getElementById('lobby-status').textContent = `Waiting for players... (\( {players.length}/ \){maxPlayers} joined)`;
+        }
+
+        document.getElementById('join-room-btn').onclick = () => {
+            const code = document.getElementById('join-code-input').value.trim();
+            if (code && checkName()) {
+                document.getElementById('join-status').classList.remove('hidden');
+                setTimeout(() => {
+                    const colorIndex = players.length;
+                    if (colorIndex < 4) {
+                        players.push({name: playerName, color: colors[colorIndex], colorIndex, pieces: [-1,-1,-1,-1], finished: false, rank: 0});
+                        alert(`Joined room ${code}! Color: ${colors[colorIndex]}`);
+                        startGame();
+                    } else {
+                        alert('Room full!');
+                    }
+                }, 1500);
+            }
+        };
+
+        document.querySelectorAll('[id^="back-to-landing"]').forEach(b => b.onclick = () => switchSection('landing'));
+
+        function startGame() {
+            switchSection('gameBoard');
+            gameStarted = true;
+            placeAllPieces();
+            updateTurnDisplay();
+            updateRankings();
+            logMessage('Game Started! ' + players[currentTurnIndex].name + "'s turn.");
+        }
+
+        function placeAllPieces() {
+            const board = document.getElementById('game-board-section');
+            board.innerHTML = '';
+            players.forEach((p, pIdx) => {
+                p.pieces.forEach((pos, pieceIdx) => {
+                    const piece = document.createElement('div');
+                    piece.className = `piece ${p.color}`;
+                    piece.dataset.playerIdx = pIdx;
+                    piece.dataset.pieceIdx = pieceIdx;
+                    piece.dataset.num = pieceIdx + 1;
+                    updatePiecePosition(piece, pos, p.colorIndex);
+                    piece.onclick = () => handlePieceSelect(pIdx, pieceIdx);
+                    board.appendChild(piece);
+                });
+            });
+        }
+
+        function updatePiecePosition(pieceElem, pos, colorIndex) {
+            if (pos === -1) {
+                const offsets = [[8,8], [8,82], [82,8], [82,82]];
+                pieceElem.style.left = offsets[colorIndex][0] + '%';
+                pieceElem.style.top = offsets[colorIndex][1] + '%';
+            } else if (pos >= 57) {
+                pieceElem.style.left = '48%';
+                pieceElem.style.top = '48%';
+                pieceElem.style.transform = 'scale(1.2)';
+            } else if (pos >= 52) {
+                // Home stretch simplified
+                const homeOffset = (pos - 52) * 4;
+                pieceElem.style.left = `calc(48% + ${homeOffset}px)`;
+                pieceElem.style.top = '48%';
+            } else {
+                const pathPos = path[pos];
+                pieceElem.style.left = pathPos.left;
+                pieceElem.style.top = pathPos.top;
+            }
+        }
+
+        function handlePieceSelect(pIdx, pieceIdx) {
+            if (pIdx !== currentTurnIndex || !diceRolled || players[pIdx].finished) return;
+            const p = players[pIdx];
+            if (p.pieces[pieceIdx] === -1 && rollValue !== 6) return logMessage('Need 6 to bring out!');
+            selectedPlayerIndex = pIdx;
+            selectedPieceIndex = pieceIdx;
+            logMessage(`${p.name} selected piece ${pieceIdx+1}`);
+            movePiece();
+        }
+
+        function movePiece() {
+            if (selectedPieceIndex === -1) return;
+            const p = players[selectedPlayerIndex];
+            let newPos = p.pieces[selectedPieceIndex];
+
+            if (newPos === -1) {
+                if (rollValue === 6) newPos = 0;
+                else return;
+            } else {
+                newPos += rollValue;
+            }
+
+            // Check overshoot for home entry (need exact)
+            if (newPos > 56) {
+                if (newPos - rollValue <= 56 && newPos - rollValue + rollValue === 56) {
+                    newPos = 56; // exact home
+                } else {
+                    logMessage('Need exact roll to enter home!');
+                    newPos -= rollValue;
+                }
+            }
+
+            p.pieces[selectedPieceIndex] = newPos;
+
+            const pieceElem = document.querySelector(`.piece[data-player-idx="\( {selectedPlayerIndex}"][data-piece-idx=" \){selectedPieceIndex}"]`);
+            updatePiecePosition(pieceElem, newPos, p.colorIndex);
+
+            // Kill logic stub (if landed on opponent in non-safe zone)
+            // players.forEach(other => { if (other !== p && other.pieces.includes(newPos) && !isSafeZone(newPos)) { kill } });
+
+            // Check if player finished
+            if (p.pieces.every(pos => pos >= 56)) {
+                if (!p.finished) {
+                    p.finished = true;
+                    p.rank = nextRank++;
+                    finishedPlayers++;
+                    logMessage(`${p.name} finished in \( {p.rank} \){getOrdinal(p.rank)} place!`);
+                    confetti({ particleCount: 250, spread: 100, origin: { y: 0.6 } });
+                    updateRankings();
+                }
+            }
+
+            diceRolled = false;
+            document.getElementById('dice').textContent = 'Roll 🎲';
+            if (rollValue !== 6 || p.finished) nextTurn();
+            else logMessage('Rolled 6! Roll again.');
+        }
+
+        function getOrdinal(n) {
+            const s = ['th','st','nd','rd'];
+            const v = n % 100;
+            return s[(v-20)%10] || s[v] || s[0];
+        }
+
+        function updateRankings() {
+            const rankList = document.getElementById('rank-list');
+            rankList.innerHTML = '';
+            const ranked = players.filter(p => p.rank > 0).sort((a,b) => a.rank - b.rank);
+            ranked.forEach(p => {
+                const div = document.createElement('div');
+                div.className = 'rank-item';
+                div.innerHTML = `<strong>\( {p.rank} \){getOrdinal(p.rank)}</strong> - \( {p.name} ( \){p.color.toUpperCase()})`;
+                rankList.appendChild(div);
+            });
+            if (finishedPlayers === players.length) {
+                logMessage('Game Over! All players finished.');
+            }
+        }
+
+        document.getElementById('dice').onclick = () => {
+            const myIndex = players.findIndex(p => p.name === playerName);
+            if (!gameStarted || currentTurnIndex !== myIndex || diceRolled || players[myIndex].finished) return;
+            diceRolled = true;
+            rollValue = Math.floor(Math.random() * 6) + 1;
+            document.getElementById('dice').textContent = rollValue;
+            document.getElementById('dice').classList.add('rolling');
+            setTimeout(() => document.getElementById('dice').classList.remove('rolling'), 1200);
+
+            logMessage(`${players[currentTurnIndex].name} rolled ${rollValue}`);
+
+            const audio = new Audio('https://cdn.pixabay.com/download/audio/2022/03/24/audio_6b1d6d8f3d.mp3?filename=dice-roll-3-100682.mp3');
+            audio.play().catch(() => {});
+
+            // Auto-select if only one option
+            const canBringOut = players[currentTurnIndex].pieces.some(pos => pos === -1) && rollValue === 6;
+            const movableCount = players[currentTurnIndex].pieces.filter(pos => pos !== -1).length;
+            if ((movableCount === 0 && canBringOut) || movableCount === 1) {
+                const pieceIdx = canBringOut ? players[currentTurnIndex].pieces.indexOf(-1) : players[currentTurnIndex].pieces.findIndex(pos => pos !== -1);
+                selectedPlayerIndex = currentTurnIndex;
+                selectedPieceIndex = pieceIdx;
+                movePiece();
+            } else {
+                logMessage('Select a piece to move!');
+            }
+        };
+
+        function nextTurn() {
+            currentTurnIndex = (currentTurnIndex + 1) % players.length;
+            while (players[currentTurnIndex].finished) {
+                currentTurnIndex = (currentTurnIndex + 1) % players.length;
+            }
+            updateTurnDisplay();
+        }
+
+        function updateTurnDisplay() {
+            if (finishedPlayers === players.length) {
+                document.getElementById('current-turn').textContent = 'Game Over!';
+                return;
+            }
+            const p = players[currentTurnIndex];
+            document.getElementById('current-turn').textContent = `\( {p.name}'s Turn ( \){p.color.toUpperCase()}) ${diceRolled ? '- Select piece' : '- Roll Dice!'}`;
+        }
+
+        function logMessage(msg) {
+            const log = document.getElementById('game-log');
+            log.innerHTML += `<div>${new Date().toLocaleTimeString()}: ${msg}</div>`;
+            log.scrollTop = log.scrollHeight;
+        }
+
+        // Chat + Emoji
+        const picker = new EmojiButton();
+        picker.on('emoji', emoji => {
+            document.getElementById('chat-input').value += emoji.emoji;
+        });
+        document.getElementById('emoji-btn').onclick = () => picker.togglePicker(document.getElementById('emoji-btn'));
+
+        const chatInput = document.getElementById('chat-input');
+        chatInput.addEventListener('keypress', e => {
+            if (e.key === 'Enter' && chatInput.value.trim()) {
+                const msg = chatInput.value.trim();
+                document.getElementById('chat-messages').innerHTML += `<p><strong>${playerName}:</strong> ${msg}</p>`;
+                logMessage(`Chat - ${playerName}: ${msg}`);
+                chatInput.value = '';
+                document.getElementById('chat-messages').scrollTop = document.getElementById('chat-messages').scrollHeight;
+            }
+        });
+    </script>
+</body>
+</html>
