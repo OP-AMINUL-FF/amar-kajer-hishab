@@ -3,48 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Amar Kajer Hisab by OP Aminul FF</title>
-    <meta name="description" content="লন্ড্রি/আয়রন/পোশাক প্রসেসিং হিসাব অ্যাপ - রিয়েল-টাইম ট্র্যাকিং">
+    <title>Amar Kajer Hisab by OP Aminul FF - User Panel</title>
+    <meta name="description" content="আমার কাজের হিসাব রাখুন সহজে - লন্ড্রি আয়রন পোশাক হিসাব। OP Aminul FF">
+    <meta name="keywords" content="amar kajer hishab, op aminul ff, hisab app, laundry tracker">
     
-    <!-- Supabase CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    
-    <!-- Font Awesome Icons -->
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        /* CSS Variables */
-        :root {
-            --primary: #4361ee;
-            --primary-dark: #3a56d4;
-            --secondary: #7209b7;
-            --success: #2ecc71;
-            --warning: #f39c12;
-            --danger: #e74c3c;
-            --light: #f8f9fa;
-            --dark: #2c3e50;
-            --gray: #6c757d;
-            --light-gray: #e9ecef;
-            --border: #dee2e6;
-            --shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
-            --shadow-lg: 0 1rem 3rem rgba(0, 0, 0, 0.175);
-            --radius: 10px;
-            --transition: all 0.3s ease;
-        }
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Segoe UI', 'Roboto', sans-serif;
         }
 
         body {
-            font-family: 'Segoe UI', 'Roboto', sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: var(--dark);
             min-height: 100vh;
             padding: 20px;
-            line-height: 1.6;
         }
 
         .container {
@@ -55,136 +32,112 @@
         /* Header */
         .header {
             background: white;
-            border-radius: var(--radius);
-            padding: 25px 30px;
+            border-radius: 20px;
+            padding: 30px;
             margin-bottom: 30px;
-            box-shadow: var(--shadow);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            gap: 20px;
         }
 
         .app-title {
-            color: var(--primary);
+            color: #667eea;
             font-size: 2.2rem;
             font-weight: 700;
-            margin-bottom: 5px;
         }
 
         .app-subtitle {
-            color: var(--gray);
-            font-size: 1.1rem;
+            color: #666;
+            margin-top: 5px;
         }
 
-        .user-info {
+        .profile-mini {
             display: flex;
             align-items: center;
             gap: 15px;
+            background: #f8f9fa;
+            padding: 10px 20px;
+            border-radius: 50px;
         }
 
-        .profile-img {
+        .profile-mini img {
             width: 50px;
             height: 50px;
             border-radius: 50%;
-            object-fit: cover;
-            border: 3px solid var(--primary);
-        }
-
-        .user-details h3 {
-            font-size: 1.2rem;
-            margin-bottom: 5px;
-        }
-
-        .user-details p {
-            color: var(--gray);
-            font-size: 0.9rem;
+            border: 3px solid #667eea;
         }
 
         /* Stats Cards */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
+            gap: 25px;
             margin-bottom: 30px;
         }
 
         .stat-card {
             background: white;
-            border-radius: var(--radius);
+            border-radius: 15px;
             padding: 25px;
-            box-shadow: var(--shadow);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             display: flex;
             align-items: center;
             gap: 20px;
-            transition: var(--transition);
+            transition: transform 0.3s;
         }
 
         .stat-card:hover {
             transform: translateY(-5px);
-            box-shadow: var(--shadow-lg);
         }
 
         .stat-icon {
             width: 70px;
             height: 70px;
-            border-radius: 50%;
+            border-radius: 15px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2rem;
+            font-size: 30px;
             color: white;
         }
 
-        .stat-icon.income {
-            background: linear-gradient(135deg, var(--success), #27ae60);
-        }
-
-        .stat-icon.pieces {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-        }
-
-        .stat-icon.days {
-            background: linear-gradient(135deg, var(--warning), #e67e22);
-        }
-
-        .stat-icon.avg {
-            background: linear-gradient(135deg, #9b59b6, #8e44ad);
-        }
+        .stat-icon.income { background: linear-gradient(135deg, #10b981, #059669); }
+        .stat-icon.pieces { background: linear-gradient(135deg, #667eea, #764ba2); }
+        .stat-icon.days { background: linear-gradient(135deg, #f59e0b, #d97706); }
+        .stat-icon.avg { background: linear-gradient(135deg, #ef4444, #dc2626); }
 
         .stat-content h3 {
-            font-size: 2.5rem;
+            font-size: 2rem;
             font-weight: 700;
             margin-bottom: 5px;
-            color: var(--dark);
         }
 
         .stat-content p {
-            color: var(--gray);
-            font-size: 1rem;
+            color: #666;
         }
 
-        /* Main Content */
-        .main-content {
+        /* Main Grid */
+        .main-grid {
             display: grid;
             grid-template-columns: 2fr 1fr;
-            gap: 30px;
+            gap: 25px;
             margin-bottom: 30px;
         }
 
         @media (max-width: 1024px) {
-            .main-content {
+            .main-grid {
                 grid-template-columns: 1fr;
             }
         }
 
-        /* Card Styling */
+        /* Cards */
         .card {
             background: white;
-            border-radius: var(--radius);
+            border-radius: 20px;
             padding: 25px;
-            box-shadow: var(--shadow);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             margin-bottom: 25px;
         }
 
@@ -192,26 +145,21 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
             padding-bottom: 15px;
-            border-bottom: 2px solid var(--light-gray);
+            border-bottom: 2px solid #f0f0f0;
         }
 
         .card-title {
             font-size: 1.5rem;
-            font-weight: 600;
-            color: var(--primary);
+            color: #667eea;
             display: flex;
             align-items: center;
             gap: 10px;
         }
 
-        .card-title i {
-            font-size: 1.8rem;
-        }
-
-        /* Table Styling */
-        .table-container {
+        /* Tables */
+        .table-responsive {
             overflow-x: auto;
         }
 
@@ -221,58 +169,21 @@
         }
 
         th {
-            background: var(--light-gray);
+            background: #f8f9fa;
             padding: 15px;
             text-align: left;
             font-weight: 600;
-            color: var(--dark);
-            border-bottom: 2px solid var(--border);
+            color: #333;
+            border-bottom: 2px solid #dee2e6;
         }
 
         td {
             padding: 15px;
-            border-bottom: 1px solid var(--border);
+            border-bottom: 1px solid #dee2e6;
         }
 
         tr:hover {
             background: #f8f9fa;
-        }
-
-        .product-badge {
-            display: inline-block;
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 600;
-        }
-
-        .badge-panjabi { background: #e3f2fd; color: #1565c0; }
-        .badge-shirt { background: #f3e5f5; color: #7b1fa2; }
-        .badge-drawjar { background: #e8f5e9; color: #2e7d32; }
-
-        /* Progress Bar */
-        .progress-container {
-            margin: 20px 0;
-        }
-
-        .progress-label {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 8px;
-        }
-
-        .progress-bar {
-            height: 12px;
-            background: var(--light-gray);
-            border-radius: 6px;
-            overflow: hidden;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            border-radius: 6px;
-            transition: width 1s ease;
         }
 
         /* Products Grid */
@@ -285,41 +196,64 @@
 
         .product-card {
             background: white;
-            border-radius: var(--radius);
+            border: 1px solid #e9ecef;
+            border-radius: 15px;
             padding: 20px;
             text-align: center;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
-            border: 1px solid var(--border);
-            transition: var(--transition);
+            transition: all 0.3s;
         }
 
         .product-card:hover {
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
             transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
 
         .product-icon {
             font-size: 2.5rem;
-            margin-bottom: 15px;
-            color: var(--primary);
+            color: #667eea;
+            margin-bottom: 10px;
         }
 
         .product-name {
             font-weight: 600;
             margin-bottom: 5px;
-            color: var(--dark);
         }
 
         .product-rate {
-            color: var(--success);
+            color: #10b981;
             font-weight: 700;
             font-size: 1.2rem;
         }
 
-        .product-count {
-            color: var(--gray);
+        .product-total {
+            color: #666;
             font-size: 0.9rem;
-            margin-top: 5px;
+            margin-top: 10px;
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            margin: 30px 0;
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .progress-bar {
+            height: 15px;
+            background: #f0f0f0;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 10px;
+            transition: width 1s;
         }
 
         /* Profile Section */
@@ -327,23 +261,23 @@
             text-align: center;
         }
 
-        .profile-image {
+        .profile-img {
             width: 150px;
             height: 150px;
             border-radius: 50%;
-            object-fit: cover;
-            border: 5px solid var(--primary);
+            border: 5px solid #667eea;
             margin-bottom: 20px;
+            object-fit: cover;
         }
 
         .profile-name {
             font-size: 1.8rem;
-            color: var(--dark);
+            color: #333;
             margin-bottom: 10px;
         }
 
         .profile-company {
-            color: var(--primary);
+            color: #667eea;
             font-size: 1.1rem;
             margin-bottom: 20px;
         }
@@ -355,47 +289,80 @@
 
         .detail-item {
             padding: 12px 0;
-            border-bottom: 1px solid var(--light-gray);
+            border-bottom: 1px solid #f0f0f0;
             display: flex;
             justify-content: space-between;
         }
 
-        .detail-item:last-child {
-            border-bottom: none;
-        }
-
         .detail-label {
             font-weight: 600;
-            color: var(--dark);
+            color: #333;
         }
 
         .detail-value {
-            color: var(--gray);
+            color: #666;
         }
 
-        /* Footer */
-        .footer {
-            text-align: center;
-            padding: 25px;
+        /* Tabs */
+        .tabs {
+            display: flex;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            flex-wrap: wrap;
+        }
+
+        .tab {
+            flex: 1;
+            padding: 15px 25px;
+            border: none;
+            background: white;
+            color: #666;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            min-width: 120px;
+        }
+
+        .tab:hover {
+            background: #f8f9fa;
+            color: #667eea;
+        }
+
+        .tab.active {
+            background: linear-gradient(135deg, #667eea, #764ba2);
             color: white;
-            font-size: 0.9rem;
-            opacity: 0.9;
-            margin-top: 30px;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         /* Loading */
         .loading {
             text-align: center;
             padding: 50px;
-            color: var(--gray);
+            color: #666;
         }
 
         .spinner {
-            border: 4px solid rgba(67, 97, 238, 0.1);
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
             border-radius: 50%;
-            border-top: 4px solid var(--primary);
-            width: 40px;
-            height: 40px;
+            width: 50px;
+            height: 50px;
             animation: spin 1s linear infinite;
             margin: 0 auto 20px;
         }
@@ -411,13 +378,13 @@
             top: 20px;
             right: 20px;
             padding: 15px 25px;
-            background: var(--success);
+            background: #10b981;
             color: white;
-            border-radius: var(--radius);
-            box-shadow: var(--shadow-lg);
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
             z-index: 1000;
             transform: translateX(150%);
-            transition: transform 0.5s ease;
+            transition: transform 0.5s;
         }
 
         .notification.show {
@@ -425,7 +392,15 @@
         }
 
         .notification.error {
-            background: var(--danger);
+            background: #ef4444;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 30px;
+            color: white;
+            margin-top: 30px;
         }
 
         /* Responsive */
@@ -433,6 +408,7 @@
             .header {
                 flex-direction: column;
                 text-align: center;
+                gap: 20px;
             }
             
             .app-title {
@@ -443,8 +419,14 @@
                 grid-template-columns: 1fr;
             }
             
-            th, td {
-                padding: 10px 8px;
+            .products-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .products-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -457,14 +439,13 @@
                 <h1 class="app-title">
                     <i class="fas fa-calculator"></i> আমার কাজের হিসাব
                 </h1>
-                <p class="app-subtitle">OP Aminul FF - লন্ড্রি/আয়রন/পোশাক প্রসেসিং ট্র্যাকার</p>
+                <p class="app-subtitle">OP Aminul FF - লন্ড্রি/আয়রন/পোশাক প্রসেসিং</p>
             </div>
-            <div class="user-info">
-                <img src="https://ui-avatars.com/api/?name=OP+Aminul+FF&background=4361ee&color=fff&size=150" 
-                     alt="Profile" class="profile-img">
-                <div class="user-details">
-                    <h3 id="profileName">OP Aminul FF</h3>
-                    <p id="profileCompany">লন্ড্রি সার্ভিস</p>
+            <div class="profile-mini" id="profileMini">
+                <img src="https://ui-avatars.com/api/?name=OP+Aminul+FF&background=667eea&color=fff&size=100" alt="Profile">
+                <div>
+                    <strong id="miniName">OP Aminul FF</strong>
+                    <p style="color: #666; font-size: 0.9rem;" id="miniCompany">লন্ড্রি সার্ভিস</p>
                 </div>
             </div>
         </div>
@@ -476,11 +457,10 @@
                     <i class="fas fa-money-bill-wave"></i>
                 </div>
                 <div class="stat-content">
-                    <h3 id="totalAmount">0</h3>
+                    <h3 id="totalAmount">৳0</h3>
                     <p>সর্বমোট আয়</p>
                 </div>
             </div>
-            
             <div class="stat-card">
                 <div class="stat-icon pieces">
                     <i class="fas fa-tshirt"></i>
@@ -490,7 +470,6 @@
                     <p>সর্বমোট পিস</p>
                 </div>
             </div>
-            
             <div class="stat-card">
                 <div class="stat-icon days">
                     <i class="fas fa-calendar-alt"></i>
@@ -500,157 +479,302 @@
                     <p>মোট কাজের দিন</p>
                 </div>
             </div>
-            
             <div class="stat-card">
                 <div class="stat-icon avg">
                     <i class="fas fa-chart-line"></i>
                 </div>
                 <div class="stat-content">
-                    <h3 id="avgPerDay">0</h3>
+                    <h3 id="avgPerDay">৳0</h3>
                     <p>গড় আয়/দিন</p>
                 </div>
             </div>
         </div>
 
-        <!-- Main Content -->
-        <div class="main-content">
-            <!-- Left Column -->
-            <div>
-                <!-- Recent Entries -->
-                <div class="card">
-                    <div class="card-header">
-                        <h2 class="card-title">
-                            <i class="fas fa-history"></i> সাম্প্রতিক এন্ট্রি
-                        </h2>
-                        <span class="text-muted" id="lastUpdate">আজ</span>
+        <!-- Connection Status -->
+        <div style="background: white; border-radius: 10px; padding: 15px; margin-bottom: 25px; display: flex; align-items: center; gap: 10px;">
+            <i class="fas fa-database" style="color: #667eea;"></i>
+            <span>JSONBin সংযোগ:</span>
+            <span id="connectionStatus" style="color: #10b981; font-weight: 600;">✅ সংযুক্ত</span>
+            <span style="margin-left: auto; color: #666; font-size: 0.9rem;" id="lastSyncTime"></span>
+        </div>
+
+        <!-- Tabs -->
+        <div class="tabs">
+            <button class="tab active" onclick="showTab('dashboard')">
+                <i class="fas fa-home"></i> ড্যাশবোর্ড
+            </button>
+            <button class="tab" onclick="showTab('products')">
+                <i class="fas fa-tshirt"></i> পণ্য
+            </button>
+            <button class="tab" onclick="showTab('history')">
+                <i class="fas fa-history"></i> পুরো হিসাব
+            </button>
+            <button class="tab" onclick="showTab('profile')">
+                <i class="fas fa-user"></i> প্রোফাইল
+            </button>
+            <button class="tab" onclick="showTab('payments')">
+                <i class="fas fa-money-bill"></i> বাকি/পাওনা
+            </button>
+        </div>
+
+        <!-- Dashboard Tab -->
+        <div id="dashboard" class="tab-content active">
+            <div class="main-grid">
+                <!-- Left Column -->
+                <div>
+                    <div class="card">
+                        <div class="card-header">
+                            <h2 class="card-title">
+                                <i class="fas fa-clock"></i> সাম্প্রতিক এন্ট্রি
+                            </h2>
+                            <span id="lastEntryDate" style="color: #666;">আজ</span>
+                        </div>
+                        <div class="table-responsive">
+                            <table id="recentEntriesTable">
+                                <thead>
+                                    <tr>
+                                        <th>তারিখ</th>
+                                        <th>প্যানজাবি</th>
+                                        <th>শার্ট</th>
+                                        <th>ড্রজার</th>
+                                        <th>মোট পিস</th>
+                                        <th>মোট টাকা</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="recentEntriesBody">
+                                    <tr>
+                                        <td colspan="6" class="loading">
+                                            <div class="spinner"></div>
+                                            <p>ডাটা লোড হচ্ছে...</p>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                    <div class="table-container">
-                        <table id="recentTable">
-                            <thead>
-                                <tr>
-                                    <th>তারিখ</th>
-                                    <th>প্যানজাবি</th>
-                                    <th>শার্ট</th>
-                                    <th>ড্রজার</th>
-                                    <th>মোট পিস</th>
-                                    <th>মোট টাকা</th>
-                                </tr>
-                            </thead>
-                            <tbody id="recentTableBody">
-                                <tr>
-                                    <td colspan="6" class="loading">
-                                        <div class="spinner"></div>
-                                        <p>ডাটা লোড হচ্ছে...</p>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h2 class="card-title">
+                                <i class="fas fa-chart-pie"></i> পণ্য অনুযায়ী বিশ্লেষণ
+                            </h2>
+                        </div>
+                        <div class="products-grid" id="productsGrid"></div>
                     </div>
                 </div>
 
-                <!-- Product Breakdown -->
-                <div class="card">
-                    <h2 class="card-title">
-                        <i class="fas fa-chart-pie"></i> পণ্য অনুযায়ী বিশ্লেষণ
-                    </h2>
-                    <div class="products-grid" id="productsGrid">
-                        <!-- Products will be loaded here -->
-                    </div>
-                </div>
-            </div>
-
-            <!-- Right Column -->
-            <div>
-                <!-- Profile -->
-                <div class="card">
-                    <div class="profile-section">
-                        <img src="https://ui-avatars.com/api/?name=OP+Aminul+FF&background=7209b7&color=fff&size=150" 
-                             alt="Profile" class="profile-image" id="profileImage">
-                        <h2 class="profile-name" id="profileNameFull">OP Aminul FF</h2>
-                        <p class="profile-company" id="profileCompanyFull">লন্ড্রি সার্ভিস</p>
-                        
-                        <div class="profile-details">
-                            <div class="detail-item">
-                                <span class="detail-label">দক্ষতা:</span>
-                                <span class="detail-value" id="profileSkills">লন্ড্রি, আয়রন</span>
+                <!-- Right Column -->
+                <div>
+                    <div class="card">
+                        <div class="card-header">
+                            <h2 class="card-title">
+                                <i class="fas fa-tachometer-alt"></i> লাইভ প্রগ্রেস
+                            </h2>
+                        </div>
+                        <div class="progress-container">
+                            <div class="progress-header">
+                                <span>গতকাল: <strong id="yesterdayPieces">0</strong> পিস</span>
+                                <span id="progressPercent">0%</span>
                             </div>
-                            <div class="detail-item">
-                                <span class="detail-label">যোগাযোগ:</span>
-                                <span class="detail-value" id="profileContact">aminul@example.com</span>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="progressFill" style="width: 0%;"></div>
                             </div>
-                            <div class="detail-item">
-                                <span class="detail-label">অবস্থান:</span>
-                                <span class="detail-value" id="profileLocation">ঢাকা</span>
-                            </div>
-                            <div class="detail-item">
-                                <span class="detail-label">চুক্তির দিন:</span>
-                                <span class="detail-value" id="agreementDays">30</span>
+                            <div style="text-align: center; margin-top: 20px;">
+                                <h3 id="todayProgress">0 / 0 পিস</h3>
+                                <p style="color: #666;">আজ পর্যন্ত কাজ</p>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <!-- Progress -->
-                <div class="card">
-                    <h2 class="card-title">
-                        <i class="fas fa-tachometer-alt"></i> আজকের প্রোগ্রেস
-                    </h2>
-                    <div class="progress-container">
-                        <div class="progress-label">
-                            <span>গতকাল: <strong id="lastDayPieces">0</strong> পিস</span>
-                            <span id="progressPercent">0%</span>
+                    <div class="card">
+                        <div class="card-header">
+                            <h2 class="card-title">
+                                <i class="fas fa-star"></i> আজকের রেট
+                            </h2>
                         </div>
-                        <div class="progress-bar">
-                            <div class="progress-fill" id="progressFill" style="width: 0%"></div>
-                        </div>
-                        <div style="text-align: center; margin-top: 15px; font-size: 1.1rem;">
-                            <span id="liveCounter">0</span> / <span id="lastDayTotal">0</span> পিস সম্পূর্ণ
+                        <div id="todayRates">
+                            <div style="display: grid; gap: 10px;">
+                                <div style="display: flex; justify-content: space-between; padding: 10px; background: #f8f9fa; border-radius: 10px;">
+                                    <span>প্যানজাবি:</span>
+                                    <span style="font-weight: 600; color: #10b981;">৳7/পিস</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; padding: 10px; background: #f8f9fa; border-radius: 10px;">
+                                    <span>শার্ট:</span>
+                                    <span style="font-weight: 600; color: #10b981;">৳5/পিস</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; padding: 10px; background: #f8f9fa; border-radius: 10px;">
+                                    <span>34-38 প্যানজাবি:</span>
+                                    <span style="font-weight: 600; color: #10b981;">৳5/পিস</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; padding: 10px; background: #f8f9fa; border-radius: 10px;">
+                                    <span>20-30 প্যানজাবি:</span>
+                                    <span style="font-weight: 600; color: #10b981;">৳3.50/পিস</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; padding: 10px; background: #f8f9fa; border-radius: 10px;">
+                                    <span>14-18 প্যানজাবি:</span>
+                                    <span style="font-weight: 600; color: #10b981;">৳3/পিস</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; padding: 10px; background: #f8f9fa; border-radius: 10px;">
+                                    <span>ড্রজার:</span>
+                                    <span style="font-weight: 600; color: #10b981;">৳3/পিস</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- All Time History -->
-        <div class="card">
-            <div class="card-header">
-                <h2 class="card-title">
-                    <i class="fas fa-database"></i> পুরো হিসাব (শুরু থেকে)
-                </h2>
+        <!-- Products Tab -->
+        <div id="products" class="tab-content">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">
+                        <i class="fas fa-tshirt"></i> সব পণ্যের বিস্তারিত
+                    </h2>
+                </div>
+                <div class="table-responsive">
+                    <table id="productsDetailTable">
+                        <thead>
+                            <tr>
+                                <th>পণ্য</th>
+                                <th>রেট</th>
+                                <th>মোট পিস</th>
+                                <th>মোট টাকা</th>
+                                <th>গড়/দিন</th>
+                            </tr>
+                        </thead>
+                        <tbody id="productsDetailBody"></tbody>
+                    </table>
+                </div>
             </div>
-            <div class="table-container">
-                <table id="fullHistoryTable">
-                    <thead>
-                        <tr>
-                            <th>তারিখ</th>
-                            <th>প্যানজাবি</th>
-                            <th>শার্ট</th>
-                            <th>34-38</th>
-                            <th>20-30</th>
-                            <th>14-18</th>
-                            <th>ড্রজার</th>
-                            <th>মোট পিস</th>
-                            <th>মোট টাকা</th>
-                        </tr>
-                    </thead>
-                    <tbody id="fullHistoryBody">
-                        <tr>
-                            <td colspan="9" class="loading">
-                                <div class="spinner"></div>
-                                <p>পুরো হিসাব লোড হচ্ছে...</p>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+        </div>
+
+        <!-- History Tab -->
+        <div id="history" class="tab-content">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">
+                        <i class="fas fa-database"></i> শুরু থেকে আজ পর্যন্ত পুরো হিসাব
+                    </h2>
+                    <div>
+                        <button class="btn" onclick="downloadCSV()" style="background: #10b981; color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer;">
+                            <i class="fas fa-download"></i> CSV ডাউনলোড
+                        </button>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table id="fullHistoryTable">
+                        <thead>
+                            <tr>
+                                <th>তারিখ</th>
+                                <th>প্যানজাবি</th>
+                                <th>শার্ট</th>
+                                <th>34-38</th>
+                                <th>20-30</th>
+                                <th>14-18</th>
+                                <th>ড্রজার</th>
+                                <th>মোট পিস</th>
+                                <th>মোট টাকা</th>
+                            </tr>
+                        </thead>
+                        <tbody id="fullHistoryBody"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Profile Tab -->
+        <div id="profile" class="tab-content">
+            <div class="card">
+                <div class="profile-section">
+                    <img src="https://ui-avatars.com/api/?name=OP+Aminul+FF&background=667eea&color=fff&size=200" alt="Profile" class="profile-img" id="profileImage">
+                    <h2 class="profile-name" id="profileName">OP Aminul FF</h2>
+                    <p class="profile-company" id="profileCompany">লন্ড্রি সার্ভিস</p>
+                    
+                    <div class="profile-details">
+                        <div class="detail-item">
+                            <span class="detail-label">দক্ষতা:</span>
+                            <span class="detail-value" id="profileSkills">লন্ড্রি, আয়রন, পোশাক প্রসেসিং</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">যোগাযোগ:</span>
+                            <span class="detail-value" id="profileContact">aminul@example.com</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">অবস্থান:</span>
+                            <span class="detail-value" id="profileLocation">ঢাকা, বাংলাদেশ</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">চুক্তির দিন:</span>
+                            <span class="detail-value" id="agreementDays">30 দিন</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">যোগদান:</span>
+                            <span class="detail-value" id="agreementStart">১ জানুয়ারি, ২০২৪</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">বায়ো:</span>
+                            <span class="detail-value" id="profileBio">পেশাদার লন্ড্রি ও পোশাক প্রসেসিং বিশেষজ্ঞ। ৫+ বছর অভিজ্ঞতা।</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Payments Tab -->
+        <div id="payments" class="tab-content">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">
+                        <i class="fas fa-money-bill-wave"></i> বাকি/পাওনা ও পেমেন্ট হিসাব
+                    </h2>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 30px;">
+                    <div style="background: linear-gradient(135deg, #ef4444, #dc2626); color: white; padding: 20px; border-radius: 15px; text-align: center;">
+                        <h3 style="font-size: 2rem; margin-bottom: 5px;" id="totalDue">৳0</h3>
+                        <p>মোট বাকি</p>
+                    </div>
+                    <div style="background: linear-gradient(135deg, #10b981, #059669); color: white; padding: 20px; border-radius: 15px; text-align: center;">
+                        <h3 style="font-size: 2rem; margin-bottom: 5px;" id="totalPaid">৳0</h3>
+                        <p>মোট পরিশোধ</p>
+                    </div>
+                    <div style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; padding: 20px; border-radius: 15px; text-align: center;">
+                        <h3 style="font-size: 2rem; margin-bottom: 5px;" id="dueBalance">৳0</h3>
+                        <p>বাকি পাওনা</p>
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <table id="paymentsTable">
+                        <thead>
+                            <tr>
+                                <th>তারিখ</th>
+                                <th>ধরন</th>
+                                <th>বিবরণ</th>
+                                <th>পরিমাণ</th>
+                                <th>স্ট্যাটাস</th>
+                            </tr>
+                        </thead>
+                        <tbody id="paymentsBody">
+                            <tr>
+                                <td colspan="5" class="loading">
+                                    <div class="spinner"></div>
+                                    <p>পেমেন্ট ডাটা লোড হচ্ছে...</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
 
         <!-- Footer -->
         <div class="footer">
-            <p>© 2023 Amar Kajer Hisab by OP Aminul FF | Supabase Realtime Database | সর্বশেষ আপডেট: <span id="currentDate"></span></p>
-            <p style="margin-top: 10px; font-size: 0.8rem;">
-                <i class="fas fa-sync-alt"></i> রিয়েল-টাইম ডাটা সিঙ্ক | <i class="fas fa-shield-alt"></i> সিকিউরড কানেকশন
-            </p>
+            <p style="margin-bottom: 10px;">© 2024 Amar Kajer Hisab by OP Aminul FF</p>
+            <p style="opacity: 0.9;">JSONBin + GitHub Pages | রিয়েল-টাইম ডাটা সিঙ্ক | কোনো লগইন নেই</p>
+            <p style="margin-top: 10px; font-size: 0.9rem; opacity: 0.8;" id="footerDate"></p>
         </div>
     </div>
 
@@ -658,371 +782,503 @@
     <div class="notification" id="notification"></div>
 
     <script>
-        // Supabase Configuration
-        const supabaseUrl = 'https://qsvuzobizalcgqnlxuqv.supabase.co';
-        const supabaseKey = 'sb_publishable_mbhqaW7EzLccLp3gNjNy1g_ncCb4uvN';
+        // ============================================
+        // JSONBin Configuration - YOUR MASTER KEY
+        // ============================================
+        const JSONBIN_MASTER_KEY = '$2a$10$mHHGr95EcBoKXe0lKcLWyu6PwXicvUb1BWMwjINoIpm1IPxLdtF1q';
+        const JSONBIN_BIN_ID = '698c5c7743b1c97be97674e7'; // প্রথমবার Run করার পর Bin ID বসান
         
-        // Initialize Supabase
-        const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
-        
+        // App Products & Rates
+        const PRODUCTS = [
+            { id: 'panjabi', name: 'প্যানজাবি', rate: 7, icon: 'fa-vest' },
+            { id: 'shirt', name: 'শার্ট', rate: 5, icon: 'fa-tshirt' },
+            { id: 'panjabi_34_38', name: '34-38 প্যানজাবি', rate: 5, icon: 'fa-vest' },
+            { id: 'panjabi_20_30', name: '20-30 প্যানজাবি', rate: 3.5, icon: 'fa-vest' },
+            { id: 'panjabi_14_18', name: '14-18 প্যানজাবি', rate: 3, icon: 'fa-vest' },
+            { id: 'drawjar', name: 'ড্রজার', rate: 3, icon: 'fa-tshirt' }
+        ];
+
         // App State
-        let appState = {
+        let appData = {
             entries: [],
-            profile: {},
-            products: [
-                { id: 'panjabi', name: 'প্যানজাবি', rate: 7, icon: 'fas fa-vest' },
-                { id: 'shirt', name: 'শার্ট', rate: 5, icon: 'fas fa-tshirt' },
-                { id: 'panjabi_34_38', name: '34-38 প্যানজাবি', rate: 5, icon: 'fas fa-vest' },
-                { id: 'panjabi_20_30', name: '20-30 প্যানজাবি', rate: 3.5, icon: 'fas fa-vest' },
-                { id: 'panjabi_14_18', name: '14-18 প্যানজাবি', rate: 3, icon: 'fas fa-vest' },
-                { id: 'drawjar', name: 'ড্রজার', rate: 3, icon: 'fas fa-tshirt' }
-            ],
-            totals: {
-                amount: 0,
-                pieces: 0,
-                days: 0
+            profile: {
+                name: 'OP Aminul FF',
+                company: 'লন্ড্রি সার্ভিস',
+                skills: 'লন্ড্রি, আয়রন, পোশাক প্রসেসিং',
+                contact: 'aminul@example.com',
+                location: 'ঢাকা, বাংলাদেশ',
+                agreementDays: 30,
+                agreementStart: '2024-01-01',
+                bio: 'পেশাদার লন্ড্রি ও পোশাক প্রসেসিং বিশেষজ্ঞ। ৫+ বছর অভিজ্ঞতা।',
+                photoUrl: null
             },
-            lastDayPieces: 0,
-            liveProgress: 0
+            payments: [],
+            offers: [],
+            lastSync: new Date().toISOString()
         };
 
-        // DOM Elements
-        const currentDateEl = document.getElementById('currentDate');
-        const notification = document.getElementById('notification');
-
-        // Initialize Date
-        const today = new Date();
-        currentDateEl.textContent = today.toLocaleDateString('bn-BD', {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric'
-        });
-
-        // Initialize App
+        // Initialize
         document.addEventListener('DOMContentLoaded', function() {
-            loadAllData();
+            checkBinAndLoad();
+            updateFooterDate();
             startLiveProgress();
         });
 
-        // Load All Data
-        async function loadAllData() {
+        // ============ JSONBin Functions ============
+        async function checkBinAndLoad() {
+            if (!JSONBIN_BIN_ID || JSONBIN_BIN_ID === 'YOUR_BIN_ID_HERE') {
+                await createNewBin();
+            } else {
+                await loadData();
+            }
+        }
+
+        async function loadData() {
+            updateConnectionStatus('⏳ সংযোগ স্থাপন...', '#f59e0b');
+            
             try {
-                // Load entries
-                const { data: entries, error: entriesError } = await supabase
-                    .from('entries')
-                    .select('*')
-                    .order('date', { ascending: false });
-                
-                if (entriesError) throw entriesError;
-                
-                appState.entries = entries || [];
-                calculateTotals();
-                updateDashboard();
-                updateRecentTable();
-                updateFullHistory();
-                updateProductsGrid();
-                
-                // Load profile
-                const { data: profile, error: profileError } = await supabase
-                    .from('profile')
-                    .select('*')
-                    .limit(1)
-                    .single();
-                
-                if (!profileError && profile) {
-                    appState.profile = profile;
-                    updateProfile();
+                const response = await fetch(`https://api.jsonbin.io/v3/b/${JSONBIN_BIN_ID}/latest`, {
+                    headers: {
+                        'X-Master-Key': JSONBIN_MASTER_KEY
+                    }
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    appData = data.record;
+                    appData.lastSync = new Date().toISOString();
+                    updateConnectionStatus('✅ সংযুক্ত', '#10b981');
+                    updateAllUI();
+                    showNotification('ডাটা লোড হয়েছে', 'success');
+                } else {
+                    throw new Error('ডাটা লোড করতে পারেনি');
                 }
-                
-                // Setup realtime subscription
-                setupRealtime();
-                
             } catch (error) {
-                console.error('Error loading data:', error);
+                console.error('Load error:', error);
+                updateConnectionStatus('❌ সংযোগ ব্যর্থ', '#ef4444');
                 showNotification('ডাটা লোড করতে সমস্যা হয়েছে', 'error');
             }
         }
 
-        // Setup Realtime Subscription
-        function setupRealtime() {
-            const channel = supabase
-                .channel('entries-changes')
-                .on('postgres_changes', 
-                    { event: '*', schema: 'public', table: 'entries' }, 
-                    (payload) => {
-                        console.log('Realtime update received:', payload);
-                        loadAllData(); // Reload data
-                    }
-                )
-                .subscribe();
+        async function createNewBin() {
+            updateConnectionStatus('⏳ নতুন Bin তৈরি হচ্ছে...', '#f59e0b');
+            
+            const initialData = {
+                entries: [],
+                profile: appData.profile,
+                payments: [],
+                offers: [],
+                createdAt: new Date().toISOString()
+            };
+
+            try {
+                const response = await fetch('https://api.jsonbin.io/v3/b', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-Master-Key': JSONBIN_MASTER_KEY
+                    },
+                    body: JSON.stringify(initialData)
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    const binId = data.metadata.id;
+                    
+                    showNotification(`✅ নতুন Bin তৈরি হয়েছে!\nBin ID: ${binId}\n\nএই ID টি কোডে বসান।`, 'success');
+                    updateConnectionStatus(`✅ Bin তৈরি: ${binId}`, '#10b981');
+                    
+                    // Bin ID দেখান
+                    alert(`✅ JSONBin তৈরি হয়েছে!\n\nBin ID: ${binId}\n\nএই ID টি কোডের 'JSONBIN_BIN_ID' তে বসান।`);
+                } else {
+                    throw new Error('Bin তৈরি করতে পারেনি');
+                }
+            } catch (error) {
+                console.error('Create bin error:', error);
+                updateConnectionStatus('❌ Bin তৈরি ব্যর্থ', '#ef4444');
+                showNotification('Bin তৈরি করতে সমস্যা হয়েছে', 'error');
+            }
         }
 
-        // Calculate Totals
-        function calculateTotals() {
+        // ============ UI Update Functions ============
+        function updateAllUI() {
+            calculateStats();
+            updateRecentEntries();
+            updateProductsGrid();
+            updateProductsDetail();
+            updateFullHistory();
+            updateProfileUI();
+            updatePayments();
+            updateLastSyncTime();
+        }
+
+        function calculateStats() {
             let totalAmount = 0;
             let totalPieces = 0;
             
-            appState.entries.forEach(entry => {
-                totalPieces += entry.total_pieces || 0;
+            appData.entries.forEach(entry => {
                 totalAmount += entry.total_amount || 0;
+                totalPieces += entry.total_pieces || 0;
             });
-            
-            // Calculate last day pieces
-            if (appState.entries.length > 0) {
-                const sortedEntries = [...appState.entries].sort((a, b) => 
-                    new Date(b.date) - new Date(a.date)
-                );
-                appState.lastDayPieces = sortedEntries[0]?.total_pieces || 0;
-            }
-            
-            appState.totals = {
-                amount: totalAmount,
-                pieces: totalPieces,
-                days: appState.entries.length,
-                avgPerDay: appState.entries.length > 0 ? 
-                    Math.round(totalAmount / appState.entries.length) : 0
-            };
+
+            const totalDays = appData.entries.length;
+            const avgPerDay = totalDays > 0 ? Math.round(totalAmount / totalDays) : 0;
+
+            document.getElementById('totalAmount').innerHTML = `৳${totalAmount.toLocaleString()}`;
+            document.getElementById('totalPieces').innerHTML = totalPieces.toLocaleString();
+            document.getElementById('totalDays').innerHTML = totalDays;
+            document.getElementById('avgPerDay').innerHTML = `৳${avgPerDay.toLocaleString()}`;
         }
 
-        // Update Dashboard
-        function updateDashboard() {
-            // Update stats
-            document.getElementById('totalAmount').textContent = `৳${appState.totals.amount.toLocaleString()}`;
-            document.getElementById('totalPieces').textContent = appState.totals.pieces.toLocaleString();
-            document.getElementById('totalDays').textContent = appState.totals.days;
-            document.getElementById('avgPerDay').textContent = `৳${appState.totals.avgPerDay.toLocaleString()}`;
-            
-            // Update last update time
-            if (appState.entries.length > 0) {
-                const lastDate = appState.entries[0]?.date;
-                if (lastDate) {
-                    const date = new Date(lastDate);
-                    document.getElementById('lastUpdate').textContent = date.toLocaleDateString('bn-BD', {
-                        month: 'short',
-                        day: 'numeric'
-                    });
-                }
-            }
-            
-            // Update progress
-            document.getElementById('lastDayPieces').textContent = appState.lastDayPieces;
-            document.getElementById('lastDayTotal').textContent = appState.lastDayPieces;
-        }
-
-        // Update Recent Table
-        function updateRecentTable() {
-            const tbody = document.getElementById('recentTableBody');
-            const recentEntries = appState.entries.slice(0, 5);
+        function updateRecentEntries() {
+            const tbody = document.getElementById('recentEntriesBody');
+            const recentEntries = appData.entries.slice(0, 10);
             
             if (recentEntries.length === 0) {
                 tbody.innerHTML = `
                     <tr>
-                        <td colspan="6" style="text-align: center; padding: 40px; color: #6c757d;">
-                            <i class="fas fa-inbox" style="font-size: 2rem; margin-bottom: 10px;"></i>
+                        <td colspan="6" style="text-align: center; padding: 40px; color: #666;">
+                            <i class="fas fa-inbox" style="font-size: 3rem; margin-bottom: 15px;"></i>
+                            <p>কোন এন্ট্রি পাওয়া যায়নি</p>
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+
+            let html = '';
+            recentEntries.forEach(entry => {
+                const date = new Date(entry.date);
+                html += `
+                    <tr>
+                        <td>${formatDate(date)}</td>
+                        <td>${entry.panjabi || 0}</td>
+                        <td>${entry.shirt || 0}</td>
+                        <td>${entry.drawjar || 0}</td>
+                        <td><strong>${entry.total_pieces || 0}</strong></td>
+                        <td><strong style="color: #10b981;">৳${(entry.total_amount || 0).toLocaleString()}</strong></td>
+                    </tr>
+                `;
+            });
+
+            tbody.innerHTML = html;
+
+            if (appData.entries.length > 0) {
+                const lastDate = new Date(appData.entries[0].date);
+                document.getElementById('lastEntryDate').innerHTML = formatDate(lastDate);
+                document.getElementById('yesterdayPieces').innerHTML = appData.entries[0].total_pieces || 0;
+            }
+        }
+
+        function updateProductsGrid() {
+            const container = document.getElementById('productsGrid');
+            
+            // Calculate product totals
+            const totals = {};
+            PRODUCTS.forEach(p => { totals[p.id] = { count: 0, amount: 0 }; });
+            
+            appData.entries.forEach(entry => {
+                PRODUCTS.forEach(p => {
+                    const count = entry[p.id] || 0;
+                    totals[p.id].count += count;
+                    totals[p.id].amount += count * p.rate;
+                });
+            });
+
+            let html = '';
+            PRODUCTS.forEach(p => {
+                html += `
+                    <div class="product-card">
+                        <div class="product-icon">
+                            <i class="fas ${p.icon}"></i>
+                        </div>
+                        <div class="product-name">${p.name}</div>
+                        <div class="product-rate">৳${p.rate}/পিস</div>
+                        <div class="product-total">
+                            ${totals[p.id].count.toLocaleString()} পিস
+                        </div>
+                        <div style="margin-top: 10px; font-weight: 600; color: #667eea;">
+                            ৳${(totals[p.id].amount || 0).toLocaleString()}
+                        </div>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = html;
+        }
+
+        function updateProductsDetail() {
+            const tbody = document.getElementById('productsDetailBody');
+            
+            const totals = {};
+            PRODUCTS.forEach(p => { totals[p.id] = { count: 0, amount: 0 }; });
+            
+            appData.entries.forEach(entry => {
+                PRODUCTS.forEach(p => {
+                    const count = entry[p.id] || 0;
+                    totals[p.id].count += count;
+                    totals[p.id].amount += count * p.rate;
+                });
+            });
+
+            const totalDays = appData.entries.length || 1;
+
+            let html = '';
+            PRODUCTS.forEach(p => {
+                const avgPerDay = Math.round(totals[p.id].count / totalDays);
+                html += `
+                    <tr>
+                        <td><strong>${p.name}</strong></td>
+                        <td>৳${p.rate}</td>
+                        <td>${totals[p.id].count.toLocaleString()}</td>
+                        <td>৳${(totals[p.id].amount || 0).toLocaleString()}</td>
+                        <td>${avgPerDay.toLocaleString()} পিস</td>
+                    </tr>
+                `;
+            });
+
+            // Grand Total
+            let totalPieces = 0, totalAmount = 0;
+            appData.entries.forEach(e => {
+                totalPieces += e.total_pieces || 0;
+                totalAmount += e.total_amount || 0;
+            });
+
+            html += `
+                <tr style="background: #f8f9fa; font-weight: 700;">
+                    <td colspan="2">সর্বমোট</td>
+                    <td>${totalPieces.toLocaleString()}</td>
+                    <td>৳${totalAmount.toLocaleString()}</td>
+                    <td>${totalDays} দিন</td>
+                </tr>
+            `;
+
+            tbody.innerHTML = html;
+        }
+
+        function updateFullHistory() {
+            const tbody = document.getElementById('fullHistoryBody');
+            
+            if (appData.entries.length === 0) {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="9" style="text-align: center; padding: 40px; color: #666;">
+                            <i class="fas fa-database" style="font-size: 3rem; margin-bottom: 15px;"></i>
                             <p>কোন ডাটা পাওয়া যায়নি</p>
                         </td>
                     </tr>
                 `;
                 return;
             }
-            
-            let html = '';
-            recentEntries.forEach(entry => {
-                const date = new Date(entry.date);
-                html += `
-                    <tr>
-                        <td>${date.toLocaleDateString('bn-BD', { day: 'numeric', month: 'short' })}</td>
-                        <td>${entry.panjabi || 0}</td>
-                        <td>${entry.shirt || 0}</td>
-                        <td>${entry.drawjar || 0}</td>
-                        <td><strong>${entry.total_pieces || 0}</strong></td>
-                        <td><strong class="text-success">৳${(entry.total_amount || 0).toLocaleString()}</strong></td>
-                    </tr>
-                `;
-            });
-            
-            tbody.innerHTML = html;
-        }
 
-        // Update Full History
-        function updateFullHistory() {
-            const tbody = document.getElementById('fullHistoryBody');
-            
-            if (appState.entries.length === 0) {
-                tbody.innerHTML = `
-                    <tr>
-                        <td colspan="9" style="text-align: center; padding: 40px; color: #6c757d;">
-                            <i class="fas fa-database" style="font-size: 2rem; margin-bottom: 10px;"></i>
-                            <p>কোন হিসাব পাওয়া যায়নি</p>
-                        </td>
-                    </tr>
-                `;
-                return;
-            }
-            
             let html = '';
-            // Show all entries (sorted by date descending)
-            const sortedEntries = [...appState.entries].sort((a, b) => 
-                new Date(b.date) - new Date(a.date)
-            );
-            
-            sortedEntries.forEach(entry => {
+            appData.entries.forEach(entry => {
                 const date = new Date(entry.date);
                 html += `
                     <tr>
-                        <td>${date.toLocaleDateString('bn-BD')}</td>
+                        <td>${formatDate(date)}</td>
                         <td>${entry.panjabi || 0}</td>
                         <td>${entry.shirt || 0}</td>
                         <td>${entry.panjabi_34_38 || 0}</td>
                         <td>${entry.panjabi_20_30 || 0}</td>
                         <td>${entry.panjabi_14_18 || 0}</td>
                         <td>${entry.drawjar || 0}</td>
-                        <td><strong>${entry.total_pieces || 0}</strong></td>
-                        <td><strong class="text-success">৳${(entry.total_amount || 0).toLocaleString()}</strong></td>
+                        <td>${entry.total_pieces || 0}</td>
+                        <td><strong style="color: #10b981;">৳${(entry.total_amount || 0).toLocaleString()}</strong></td>
                     </tr>
                 `;
             });
-            
+
             tbody.innerHTML = html;
         }
 
-        // Update Products Grid
-        function updateProductsGrid() {
-            const container = document.getElementById('productsGrid');
+        function updateProfileUI() {
+            const p = appData.profile;
             
-            // Calculate product totals
-            const productTotals = {};
-            appState.products.forEach(product => {
-                productTotals[product.id] = {
-                    count: 0,
-                    amount: 0
-                };
-            });
+            document.getElementById('miniName').innerHTML = p.name || 'OP Aminul FF';
+            document.getElementById('miniCompany').innerHTML = p.company || 'লন্ড্রি সার্ভিস';
+            document.getElementById('profileName').innerHTML = p.name || 'OP Aminul FF';
+            document.getElementById('profileCompany').innerHTML = p.company || 'লন্ড্রি সার্ভিস';
+            document.getElementById('profileSkills').innerHTML = p.skills || 'লন্ড্রি, আয়রন, পোশাক প্রসেসিং';
+            document.getElementById('profileContact').innerHTML = p.contact || 'aminul@example.com';
+            document.getElementById('profileLocation').innerHTML = p.location || 'ঢাকা, বাংলাদেশ';
+            document.getElementById('agreementDays').innerHTML = `${p.agreementDays || 30} দিন`;
             
-            appState.entries.forEach(entry => {
-                appState.products.forEach(product => {
-                    const count = entry[product.id] || 0;
-                    productTotals[product.id].count += count;
-                    productTotals[product.id].amount += count * product.rate;
-                });
-            });
+            if (p.agreementStart) {
+                const date = new Date(p.agreementStart);
+                document.getElementById('agreementStart').innerHTML = formatDate(date);
+            }
             
-            // Generate product cards
+            document.getElementById('profileBio').innerHTML = p.bio || 'পেশাদার লন্ড্রি ও পোশাক প্রসেসিং বিশেষজ্ঞ। ৫+ বছর অভিজ্ঞতা।';
+            
+            if (p.photoUrl) {
+                document.getElementById('profileImage').src = p.photoUrl;
+            }
+        }
+
+        function updatePayments() {
+            const tbody = document.getElementById('paymentsBody');
+            
+            if (!appData.payments || appData.payments.length === 0) {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="5" style="text-align: center; padding: 40px; color: #666;">
+                            <i class="fas fa-money-bill-wave" style="font-size: 3rem; margin-bottom: 15px;"></i>
+                            <p>কোন পেমেন্ট রেকর্ড নেই</p>
+                        </td>
+                    </tr>
+                `;
+                
+                document.getElementById('totalDue').innerHTML = '৳0';
+                document.getElementById('totalPaid').innerHTML = '৳0';
+                document.getElementById('dueBalance').innerHTML = '৳0';
+                return;
+            }
+
+            let totalDue = 0, totalPaid = 0;
+            
             let html = '';
-            appState.products.forEach(product => {
-                const total = productTotals[product.id];
+            appData.payments.slice().reverse().forEach(p => {
+                const date = new Date(p.date);
+                if (p.type === 'due') totalDue += p.amount || 0;
+                if (p.type === 'paid') totalPaid += p.amount || 0;
+                
                 html += `
-                    <div class="product-card">
-                        <div class="product-icon">
-                            <i class="${product.icon}"></i>
-                        </div>
-                        <div class="product-name">${product.name}</div>
-                        <div class="product-rate">৳${product.rate}/পিস</div>
-                        <div class="product-count">
-                            ${total.count.toLocaleString()} পিস × ৳${(total.amount || 0).toLocaleString()}
-                        </div>
-                    </div>
+                    <tr>
+                        <td>${formatDate(date)}</td>
+                        <td>
+                            <span style="display: inline-block; padding: 5px 15px; background: ${p.type === 'paid' ? '#10b981' : '#f59e0b'}; color: white; border-radius: 20px; font-size: 0.9rem;">
+                                ${p.type === 'paid' ? 'পরিশোধ' : 'বাকি'}
+                            </span>
+                        </td>
+                        <td>${p.description || '-'}</td>
+                        <td><strong>৳${(p.amount || 0).toLocaleString()}</strong></td>
+                        <td>
+                            <span style="display: inline-block; padding: 5px 15px; background: ${p.status === 'completed' ? '#10b981' : '#f59e0b'}; color: white; border-radius: 20px; font-size: 0.9rem;">
+                                ${p.status === 'completed' ? 'সম্পন্ন' : 'পেন্ডিং'}
+                            </span>
+                        </td>
+                    </tr>
                 `;
             });
+
+            tbody.innerHTML = html;
             
-            container.innerHTML = html;
+            document.getElementById('totalDue').innerHTML = `৳${totalDue.toLocaleString()}`;
+            document.getElementById('totalPaid').innerHTML = `৳${totalPaid.toLocaleString()}`;
+            document.getElementById('dueBalance').innerHTML = `৳${(totalDue - totalPaid).toLocaleString()}`;
         }
 
-        // Update Profile
-        function updateProfile() {
-            const profile = appState.profile;
-            
-            if (profile.name) {
-                document.getElementById('profileName').textContent = profile.name;
-                document.getElementById('profileNameFull').textContent = profile.name;
-            }
-            
-            if (profile.current_company) {
-                document.getElementById('profileCompany').textContent = profile.current_company;
-                document.getElementById('profileCompanyFull').textContent = profile.current_company;
-            }
-            
-            if (profile.skills) {
-                document.getElementById('profileSkills').textContent = profile.skills;
-            }
-            
-            if (profile.contact) {
-                document.getElementById('profileContact').textContent = profile.contact;
-            }
-            
-            if (profile.location) {
-                document.getElementById('profileLocation').textContent = profile.location;
-            }
-            
-            if (profile.agreement_days) {
-                document.getElementById('agreementDays').textContent = profile.agreement_days;
-            }
-            
-            if (profile.photo_url) {
-                document.getElementById('profileImage').src = profile.photo_url;
+        // ============ Helper Functions ============
+        function formatDate(date) {
+            return date.toLocaleDateString('bn-BD', {
+                day: 'numeric',
+                month: 'short',
+                year: 'numeric'
+            });
+        }
+
+        function updateConnectionStatus(message, color) {
+            const statusEl = document.getElementById('connectionStatus');
+            if (statusEl) {
+                statusEl.innerHTML = message;
+                statusEl.style.color = color;
             }
         }
 
-        // Start Live Progress
+        function updateLastSyncTime() {
+            const now = new Date();
+            document.getElementById('lastSyncTime').innerHTML = `সর্বশেষ সিঙ্ক: ${formatDate(now)} ${now.toLocaleTimeString('bn-BD')}`;
+        }
+
+        function updateFooterDate() {
+            const now = new Date();
+            document.getElementById('footerDate').innerHTML = `সর্বশেষ আপডেট: ${formatDate(now)} ${now.toLocaleTimeString('bn-BD')}`;
+        }
+
+        function showNotification(message, type = 'success') {
+            const notif = document.getElementById('notification');
+            notif.innerHTML = message;
+            notif.className = 'notification';
+            
+            if (type === 'error') {
+                notif.classList.add('error');
+            }
+            
+            notif.classList.add('show');
+            
+            setTimeout(() => {
+                notif.classList.remove('show');
+            }, 3000);
+        }
+
+        function showTab(tabId) {
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            
+            event.target.classList.add('active');
+            document.getElementById(tabId).classList.add('active');
+        }
+
         function startLiveProgress() {
-            // Calculate progress based on time of day
             const updateProgress = () => {
+                if (appData.entries.length === 0) return;
+                
+                const lastEntry = appData.entries[0];
+                const yesterdayPieces = lastEntry.total_pieces || 0;
+                
                 const now = new Date();
-                const startOfWork = new Date();
-                startOfWork.setHours(8, 0, 0, 0); // Start at 8 AM
-                const endOfWork = new Date();
-                endOfWork.setHours(20, 0, 0, 0); // End at 8 PM
+                const start = new Date(now);
+                start.setHours(8, 0, 0);
+                const end = new Date(now);
+                end.setHours(20, 0, 0);
                 
                 let progress = 0;
-                let currentPieces = 0;
-                
-                if (now >= startOfWork && now <= endOfWork) {
-                    const totalWorkTime = endOfWork - startOfWork;
-                    const elapsedTime = now - startOfWork;
-                    progress = Math.min(100, (elapsedTime / totalWorkTime) * 100);
-                } else if (now > endOfWork) {
+                if (now >= start && now <= end) {
+                    const totalTime = end - start;
+                    const elapsed = now - start;
+                    progress = Math.min(100, (elapsed / totalTime) * 100);
+                } else if (now > end) {
                     progress = 100;
                 }
                 
-                currentPieces = Math.round(appState.lastDayPieces * (progress / 100));
+                const todayPieces = Math.round(yesterdayPieces * (progress / 100));
                 
-                // Update UI
                 document.getElementById('progressFill').style.width = `${progress}%`;
-                document.getElementById('progressPercent').textContent = `${Math.round(progress)}%`;
-                document.getElementById('liveCounter').textContent = currentPieces.toLocaleString();
-                appState.liveProgress = currentPieces;
+                document.getElementById('progressPercent').innerHTML = `${Math.round(progress)}%`;
+                document.getElementById('todayProgress').innerHTML = `${todayPieces.toLocaleString()} / ${yesterdayPieces.toLocaleString()} পিস`;
             };
             
-            // Update immediately and then every minute
             updateProgress();
             setInterval(updateProgress, 60000);
         }
 
-        // Show Notification
-        function showNotification(message, type = 'success') {
-            notification.textContent = message;
-            notification.className = 'notification';
-            
-            if (type === 'error') {
-                notification.classList.add('error');
+        function downloadCSV() {
+            if (appData.entries.length === 0) {
+                showNotification('কোন ডাটা নেই', 'error');
+                return;
             }
+
+            let csv = 'Date,Panjabi,Shirt,34-38 Panjabi,20-30 Panjabi,14-18 Panjabi,Drawjar,Total Pieces,Total Amount\n';
             
-            notification.classList.add('show');
+            appData.entries.forEach(e => {
+                csv += `${e.date},${e.panjabi || 0},${e.shirt || 0},${e.panjabi_34_38 || 0},${e.panjabi_20_30 || 0},${e.panjabi_14_18 || 0},${e.drawjar || 0},${e.total_pieces || 0},${e.total_amount || 0}\n`;
+            });
+
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `amar-kajer-hisab-${new Date().toISOString().split('T')[0]}.csv`;
+            a.click();
+            URL.revokeObjectURL(url);
             
-            setTimeout(() => {
-                notification.classList.remove('show');
-            }, 3000);
+            showNotification('CSV ডাউনলোড শুরু হয়েছে', 'success');
         }
 
-        // Format Date
-        function formatDate(dateString) {
-            const date = new Date(dateString);
-            return date.toLocaleDateString('bn-BD', {
-                year: 'numeric',
-                month: 'short',
-                day: 'numeric'
-            });
-        }
+        // Make functions global
+        window.showTab = showTab;
+        window.downloadCSV = downloadCSV;
     </script>
 </body>
 </html>
