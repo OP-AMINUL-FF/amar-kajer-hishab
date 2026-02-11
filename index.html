@@ -4,45 +4,49 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     
-    <!-- Google Search Console Verification -->
+    <!-- ============ GOOGLE SEARCH CONSOLE VERIFICATION ============ -->
     <meta name="google-site-verification" content="4HZO53-oub6BZwQGPTQmA0GxCjVr6ky2ZP-rNjEapsA" />
     
-    <!-- Primary Meta Tags -->
+    <!-- ============ PRIMARY META TAGS ============ -->
     <title>আমার কাজের হিসাব | OP Aminul FF - লন্ড্রি আয়রন ট্র্যাকার</title>
     <meta name="title" content="আমার কাজের হিসাব | OP Aminul FF - লন্ড্রি আয়রন ট্র্যাকার">
-    <meta name="description" content="আমার কাজের হিসাব - OP Aminul FF এর লন্ড্রি, আয়রন ও পোশাক প্রসেসিং কাজের সম্পূর্ণ হিসাব রাখুন।">
-    <meta name="keywords" content="আমার কাজের হিসাব, OP Aminul FF, লন্ড্রি হিসাব, আয়রন হিসাব">
+    <meta name="description" content="আমার কাজের হিসাব - OP Aminul FF এর লন্ড্রি, আয়রন ও পোশাক প্রসেসিং কাজের সম্পূর্ণ হিসাব রাখুন। প্রতিদিনের পিস, আয়, বাকি-পাওনা সহ সবকিছু ট্র্যাক করুন।">
+    <meta name="keywords" content="আমার কাজের হিসাব, OP Aminul FF, লন্ড্রি হিসাব, আয়রন হিসাব, পোশাক প্রসেসিং, কাজের হিসাব, laundry tracker, ironing tracker, amar kajer hishab">
     <meta name="author" content="OP Aminul FF">
     <meta name="robots" content="index, follow">
     <meta name="language" content="Bengali">
     <meta name="geo.region" content="BD">
     <meta name="geo.placename" content="Bangladesh">
     
-    <!-- Open Graph / Facebook -->
+    <!-- ============ OPEN GRAPH / FACEBOOK META ============ -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://youraccount.github.io/amar-kajer-hisab/">
     <meta property="og:title" content="আমার কাজের হিসাব | OP Aminul FF">
-    <meta property="og:description" content="পেশাদার লন্ড্রি ও আয়রন কাজের সম্পূর্ণ হিসাব রাখুন সহজেই।">
+    <meta property="og:description" content="পেশাদার লন্ড্রি ও আয়রন কাজের সম্পূর্ণ হিসাব রাখুন সহজেই। প্রতিদিনের আয়, পিস, বাকি-পাওনা ট্র্যাক করুন।">
     <meta property="og:image" content="https://ui-avatars.com/api/?name=OP+Aminul+FF&background=667eea&color=fff&size=512">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta property="og:site_name" content="আমার কাজের হিসাব">
     
-    <!-- Twitter -->
+    <!-- ============ TWITTER CARD META ============ -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="https://youraccount.github.io/amar-kajer-hisab/">
     <meta name="twitter:title" content="আমার কাজের হিসাব | OP Aminul FF">
     <meta name="twitter:description" content="পেশাদার লন্ড্রি ও আয়রন কাজের সম্পূর্ণ হিসাব রাখুন সহজেই।">
     <meta name="twitter:image" content="https://ui-avatars.com/api/?name=OP+Aminul+FF&background=667eea&color=fff&size=512">
     
-    <!-- Canonical URL -->
+    <!-- ============ CANONICAL URL ============ -->
     <link rel="canonical" href="https://youraccount.github.io/amar-kajer-hisab/">
     
-    <!-- Favicon -->
+    <!-- ============ FAVICON ============ -->
     <link rel="icon" type="image/png" href="https://ui-avatars.com/api/?name=AKH&background=667eea&color=fff&size=64">
+    <link rel="apple-touch-icon" href="https://ui-avatars.com/api/?name=AKH&background=667eea&color=fff&size=180">
     
-    <!-- Font Awesome -->
+    <!-- ============ FONT AWESOME ============ -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        /* Mobile First CSS - আগের মতোই থাকবে */
+        /* ============ GLOBAL STYLES - MOBILE FIRST ============ */
         * {
             margin: 0;
             padding: 0;
@@ -62,7 +66,7 @@
             margin: 0 auto;
         }
 
-        /* Header */
+        /* ============ HEADER ============ */
         .header {
             background: white;
             border-radius: 20px;
@@ -87,6 +91,13 @@
             color: #667eea;
             font-size: 1.6rem;
             font-weight: 700;
+            line-height: 1.2;
+        }
+
+        @media (min-width: 768px) {
+            .app-title {
+                font-size: 2.2rem;
+            }
         }
 
         .app-subtitle {
@@ -118,7 +129,7 @@
             border: 3px solid #667eea;
         }
 
-        /* Stats Cards */
+        /* ============ STATS CARDS ============ */
         .stats-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -141,6 +152,11 @@
             display: flex;
             align-items: center;
             gap: 12px;
+            transition: transform 0.2s;
+        }
+
+        .stat-card:active {
+            transform: scale(0.98);
         }
 
         .stat-icon {
@@ -155,6 +171,14 @@
             flex-shrink: 0;
         }
 
+        @media (min-width: 768px) {
+            .stat-icon {
+                width: 70px;
+                height: 70px;
+                font-size: 30px;
+            }
+        }
+
         .stat-icon.income { background: linear-gradient(135deg, #10b981, #059669); }
         .stat-icon.pieces { background: linear-gradient(135deg, #667eea, #764ba2); }
         .stat-icon.days { background: linear-gradient(135deg, #f59e0b, #d97706); }
@@ -164,6 +188,13 @@
             font-size: 1.3rem;
             font-weight: 700;
             margin-bottom: 3px;
+            word-break: break-word;
+        }
+
+        @media (min-width: 768px) {
+            .stat-content h3 {
+                font-size: 2rem;
+            }
         }
 
         .stat-content p {
@@ -171,7 +202,13 @@
             font-size: 0.75rem;
         }
 
-        /* Tabs */
+        @media (min-width: 768px) {
+            .stat-content p {
+                font-size: 0.9rem;
+            }
+        }
+
+        /* ============ TABS ============ */
         .tabs {
             display: flex;
             background: white;
@@ -197,6 +234,7 @@
             color: #666;
             font-weight: 600;
             cursor: pointer;
+            transition: all 0.2s;
             border-radius: 40px;
             font-size: 0.85rem;
             display: flex;
@@ -204,12 +242,38 @@
             gap: 6px;
         }
 
+        @media (min-width: 768px) {
+            .tab {
+                flex: 1;
+                padding: 15px 25px;
+                font-size: 1rem;
+            }
+        }
+
+        .tab i {
+            font-size: 0.9rem;
+        }
+
         .tab.active {
             background: linear-gradient(135deg, #667eea, #764ba2);
             color: white;
         }
 
-        /* Cards */
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.3s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ============ CARDS ============ */
         .card {
             background: white;
             border-radius: 20px;
@@ -243,7 +307,13 @@
             gap: 8px;
         }
 
-        /* Tables */
+        @media (min-width: 768px) {
+            .card-title {
+                font-size: 1.5rem;
+            }
+        }
+
+        /* ============ TABLES ============ */
         .table-responsive {
             overflow-x: auto;
             margin: 0 -16px;
@@ -255,6 +325,12 @@
             width: 100%;
             border-collapse: collapse;
             min-width: 600px;
+        }
+
+        @media (max-width: 640px) {
+            table {
+                min-width: 100%;
+            }
         }
 
         th {
@@ -273,7 +349,7 @@
             font-size: 0.85rem;
         }
 
-        /* Products Grid */
+        /* ============ PRODUCTS GRID ============ */
         .products-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -284,6 +360,7 @@
         @media (min-width: 768px) {
             .products-grid {
                 grid-template-columns: repeat(3, 1fr);
+                gap: 15px;
             }
         }
 
@@ -299,6 +376,12 @@
             border-radius: 16px;
             padding: 16px 10px;
             text-align: center;
+            transition: all 0.2s;
+        }
+
+        .product-card:active {
+            transform: scale(0.96);
+            box-shadow: 0 5px 10px rgba(0,0,0,0.1);
         }
 
         .product-icon {
@@ -319,7 +402,13 @@
             font-size: 0.95rem;
         }
 
-        /* Progress Bar */
+        .product-total {
+            color: #666;
+            font-size: 0.8rem;
+            margin-top: 6px;
+        }
+
+        /* ============ PROGRESS BAR ============ */
         .progress-container {
             margin: 20px 0;
         }
@@ -345,7 +434,71 @@
             transition: width 0.5s;
         }
 
-        /* Payment Summary Cards */
+        /* ============ PROFILE SECTION ============ */
+        .profile-section {
+            text-align: center;
+        }
+
+        .profile-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 4px solid #667eea;
+            margin-bottom: 16px;
+            object-fit: cover;
+        }
+
+        @media (min-width: 768px) {
+            .profile-img {
+                width: 150px;
+                height: 150px;
+            }
+        }
+
+        .profile-name {
+            font-size: 1.5rem;
+            color: #333;
+            margin-bottom: 6px;
+        }
+
+        .profile-company {
+            color: #667eea;
+            font-size: 1rem;
+            margin-bottom: 16px;
+        }
+
+        .profile-details {
+            text-align: left;
+            margin-top: 20px;
+        }
+
+        .detail-item {
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        @media (min-width: 768px) {
+            .detail-item {
+                flex-direction: row;
+                justify-content: space-between;
+            }
+        }
+
+        .detail-label {
+            font-weight: 600;
+            color: #333;
+            font-size: 0.95rem;
+        }
+
+        .detail-value {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        /* ============ PAYMENT SUMMARY CARDS ============ */
         .payment-summary {
             display: grid;
             grid-template-columns: 1fr;
@@ -372,45 +525,15 @@
             word-break: break-word;
         }
 
-        /* Notification */
-        .notification {
-            position: fixed;
-            top: 16px;
-            left: 16px;
-            right: 16px;
-            padding: 16px 20px;
-            background: #10b981;
-            color: white;
-            border-radius: 14px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            z-index: 1000;
-            transform: translateY(-150%);
-            transition: transform 0.3s;
-            text-align: center;
-            font-weight: 600;
+        .payment-card p {
+            font-size: 0.9rem;
+            opacity: 0.95;
         }
 
-        .notification.show {
-            transform: translateY(0);
-        }
-
-        .notification.error {
-            background: #ef4444;
-        }
-
-        /* Footer */
-        .footer {
-            text-align: center;
-            padding: 25px 16px;
-            color: white;
-            margin-top: 20px;
-            font-size: 0.85rem;
-        }
-
-        /* Loading */
+        /* ============ LOADING ============ */
         .loading {
             text-align: center;
-            padding: 30px;
+            padding: 40px 20px;
             color: #666;
         }
 
@@ -429,7 +552,42 @@
             100% { transform: rotate(360deg); }
         }
 
-        /* Info Message */
+        /* ============ NOTIFICATION ============ */
+        .notification {
+            position: fixed;
+            top: 16px;
+            left: 16px;
+            right: 16px;
+            padding: 16px 20px;
+            background: #10b981;
+            color: white;
+            border-radius: 14px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            z-index: 1000;
+            transform: translateY(-150%);
+            transition: transform 0.3s;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        @media (min-width: 768px) {
+            .notification {
+                left: auto;
+                right: 20px;
+                width: auto;
+                min-width: 300px;
+            }
+        }
+
+        .notification.show {
+            transform: translateY(0);
+        }
+
+        .notification.error {
+            background: #ef4444;
+        }
+
+        /* ============ INFO MESSAGE ============ */
         .info-message {
             margin-top: 20px;
             color: #666;
@@ -439,20 +597,54 @@
             background: #f8f9fa;
             border-radius: 12px;
         }
+
+        /* ============ FOOTER ============ */
+        .footer {
+            text-align: center;
+            padding: 25px 16px;
+            color: white;
+            margin-top: 20px;
+            font-size: 0.85rem;
+        }
+
+        @media (min-width: 768px) {
+            .footer {
+                padding: 30px;
+                font-size: 0.95rem;
+            }
+        }
+
+        /* ============ CSV BUTTON ============ */
+        .csv-btn {
+            background: #10b981;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .csv-btn:active {
+            transform: scale(0.96);
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- Header -->
+        <!-- ============ HEADER ============ -->
         <div class="header">
             <div>
                 <h1 class="app-title">
                     <i class="fas fa-calculator"></i> আমার কাজের হিসাব
                 </h1>
-                <p class="app-subtitle">OP Aminul FF - লন্ড্রি/আয়রন</p>
+                <p class="app-subtitle">OP Aminul FF - লন্ড্রি/আয়রন/পোশাক প্রসেসিং</p>
             </div>
             <div class="profile-mini" id="profileMini">
-                <img src="https://ui-avatars.com/api/?name=OP+Aminul+FF&background=667eea&color=fff&size=100" alt="OP Aminul FF">
+                <img src="https://ui-avatars.com/api/?name=OP+Aminul+FF&background=667eea&color=fff&size=100" alt="OP Aminul FF - Profile Picture">
                 <div>
                     <strong id="miniName">OP Aminul FF</strong>
                     <p style="color: #666; font-size: 0.8rem;" id="miniCompany">লন্ড্রি সার্ভিস</p>
@@ -460,7 +652,7 @@
             </div>
         </div>
 
-        <!-- Stats Cards -->
+        <!-- ============ STATS CARDS ============ -->
         <div class="stats-grid">
             <div class="stat-card">
                 <div class="stat-icon income">
@@ -500,7 +692,7 @@
             </div>
         </div>
 
-        <!-- Tabs -->
+        <!-- ============ TABS ============ -->
         <div class="tabs">
             <button class="tab active" onclick="showTab('dashboard')">
                 <i class="fas fa-home"></i> ড্যাশবোর্ড
@@ -519,27 +711,210 @@
             </button>
         </div>
 
-        <!-- Dashboard Tab -->
+        <!-- ============ DASHBOARD TAB ============ -->
         <div id="dashboard" class="tab-content active">
-            <!-- Dashboard content same as before -->
+            <div class="main-grid" style="display: grid; grid-template-columns: 1fr; gap: 20px;">
+                <!-- Left Column -->
+                <div>
+                    <div class="card">
+                        <div class="card-header">
+                            <h2 class="card-title">
+                                <i class="fas fa-clock"></i> সাম্প্রতিক এন্ট্রি
+                            </h2>
+                            <span id="lastEntryDate" style="color: #666; font-size: 0.85rem;">আজ</span>
+                        </div>
+                        <div class="table-responsive">
+                            <table id="recentEntriesTable">
+                                <thead>
+                                    <tr>
+                                        <th>তারিখ</th>
+                                        <th>প্যানজাবি</th>
+                                        <th>শার্ট</th>
+                                        <th>ড্রজার</th>
+                                        <th>মোট পিস</th>
+                                        <th>মোট টাকা</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="recentEntriesBody">
+                                    <tr>
+                                        <td colspan="6" class="loading">
+                                            <div class="spinner"></div>
+                                            <p>ডাটা লোড হচ্ছে...</p>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h2 class="card-title">
+                                <i class="fas fa-chart-pie"></i> পণ্য অনুযায়ী বিশ্লেষণ
+                            </h2>
+                        </div>
+                        <div class="products-grid" id="productsGrid"></div>
+                    </div>
+                </div>
+
+                <!-- Right Column -->
+                <div>
+                    <div class="card">
+                        <div class="card-header">
+                            <h2 class="card-title">
+                                <i class="fas fa-tachometer-alt"></i> লাইভ প্রগ্রেস
+                            </h2>
+                        </div>
+                        <div class="progress-container">
+                            <div class="progress-header">
+                                <span>গতকাল: <strong id="yesterdayPieces">0</strong> পিস</span>
+                                <span id="progressPercent">0%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="progressFill" style="width: 0%;"></div>
+                            </div>
+                            <div style="text-align: center; margin-top: 16px;">
+                                <h3 style="font-size: 1.2rem;" id="todayProgress">0 / 0 পিস</h3>
+                                <p style="color: #666; font-size: 0.85rem;">আজ পর্যন্ত কাজ</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h2 class="card-title">
+                                <i class="fas fa-star"></i> আজকের রেট
+                            </h2>
+                        </div>
+                        <div id="todayRates">
+                            <div style="display: grid; gap: 8px;">
+                                <div style="display: flex; justify-content: space-between; padding: 10px 12px; background: #f8f9fa; border-radius: 12px; font-size: 0.9rem;">
+                                    <span>প্যানজাবি:</span>
+                                    <span style="font-weight: 600; color: #10b981;">৳7/পিস</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; padding: 10px 12px; background: #f8f9fa; border-radius: 12px; font-size: 0.9rem;">
+                                    <span>শার্ট:</span>
+                                    <span style="font-weight: 600; color: #10b981;">৳5/পিস</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; padding: 10px 12px; background: #f8f9fa; border-radius: 12px; font-size: 0.9rem;">
+                                    <span>34-38 প্যানজাবি:</span>
+                                    <span style="font-weight: 600; color: #10b981;">৳5/পিস</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; padding: 10px 12px; background: #f8f9fa; border-radius: 12px; font-size: 0.9rem;">
+                                    <span>20-30 প্যানজাবি:</span>
+                                    <span style="font-weight: 600; color: #10b981;">৳3.50/পিস</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; padding: 10px 12px; background: #f8f9fa; border-radius: 12px; font-size: 0.9rem;">
+                                    <span>14-18 প্যানজাবি:</span>
+                                    <span style="font-weight: 600; color: #10b981;">৳3/পিস</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; padding: 10px 12px; background: #f8f9fa; border-radius: 12px; font-size: 0.9rem;">
+                                    <span>ড্রজার:</span>
+                                    <span style="font-weight: 600; color: #10b981;">৳3/পিস</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <!-- Products Tab -->
+        <!-- ============ PRODUCTS TAB ============ -->
         <div id="products" class="tab-content">
-            <!-- Products content same as before -->
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">
+                        <i class="fas fa-tshirt"></i> সব পণ্যের বিস্তারিত
+                    </h2>
+                </div>
+                <div class="table-responsive">
+                    <table id="productsDetailTable">
+                        <thead>
+                            <tr>
+                                <th>পণ্য</th>
+                                <th>রেট</th>
+                                <th>মোট পিস</th>
+                                <th>মোট টাকা</th>
+                                <th>গড়/দিন</th>
+                            </tr>
+                        </thead>
+                        <tbody id="productsDetailBody"></tbody>
+                    </table>
+                </div>
+            </div>
         </div>
 
-        <!-- History Tab -->
+        <!-- ============ HISTORY TAB ============ -->
         <div id="history" class="tab-content">
-            <!-- History content same as before -->
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">
+                        <i class="fas fa-database"></i> শুরু থেকে আজ পর্যন্ত পুরো হিসাব
+                    </h2>
+                    <button onclick="downloadCSV()" class="csv-btn">
+                        <i class="fas fa-download"></i> CSV
+                    </button>
+                </div>
+                <div class="table-responsive">
+                    <table id="fullHistoryTable">
+                        <thead>
+                            <tr>
+                                <th>তারিখ</th>
+                                <th>প্যান</th>
+                                <th>শার্ট</th>
+                                <th>34-38</th>
+                                <th>20-30</th>
+                                <th>14-18</th>
+                                <th>ড্র</th>
+                                <th>পিস</th>
+                                <th>টাকা</th>
+                            </tr>
+                        </thead>
+                        <tbody id="fullHistoryBody"></tbody>
+                    </table>
+                </div>
+            </div>
         </div>
 
-        <!-- Profile Tab -->
+        <!-- ============ PROFILE TAB ============ -->
         <div id="profile" class="tab-content">
-            <!-- Profile content same as before -->
+            <div class="card">
+                <div class="profile-section">
+                    <img src="https://ui-avatars.com/api/?name=OP+Aminul+FF&background=667eea&color=fff&size=200" alt="OP Aminul FF" class="profile-img" id="profileImage">
+                    <h2 class="profile-name" id="profileName">OP Aminul FF</h2>
+                    <p class="profile-company" id="profileCompany">লন্ড্রি সার্ভিস</p>
+                    
+                    <div class="profile-details">
+                        <div class="detail-item">
+                            <span class="detail-label">দক্ষতা</span>
+                            <span class="detail-value" id="profileSkills">লন্ড্রি, আয়রন</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">যোগাযোগ</span>
+                            <span class="detail-value" id="profileContact">aminul@example.com</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">অবস্থান</span>
+                            <span class="detail-value" id="profileLocation">ঢাকা, বাংলাদেশ</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">চুক্তি</span>
+                            <span class="detail-value" id="agreementDays">30 দিন</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">যাত্রা শুরু</span>
+                            <span class="detail-value" id="agreementStart">১ জানু, ২০২৪</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">বায়ো</span>
+                            <span class="detail-value" id="profileBio">পেশাদার লন্ড্রি বিশেষজ্ঞ</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <!-- ============ PAYMENTS TAB - FIXED: NO FORM, ONLY VIEW ============ -->
+        <!-- ============ PAYMENTS TAB - NO FORM, ONLY VIEW ============ -->
         <div id="payments" class="tab-content">
             <div class="card">
                 <div class="card-header">
@@ -548,7 +923,7 @@
                     </h2>
                 </div>
                 
-                <!-- Payment Summary Cards - ONLY VIEW -->
+                <!-- Payment Summary Cards -->
                 <div class="payment-summary">
                     <div style="background: linear-gradient(135deg, #10b981, #059669);" class="payment-card">
                         <h3 id="totalEarned">৳0</h3>
@@ -564,10 +939,10 @@
                     </div>
                 </div>
 
-                <!-- ⚠️ IMPORTANT: NO FORM HERE - REMOVED COMPLETELY ⚠️ -->
-                <!-- Company Payment Form is DELETED - User cannot add payment -->
+                <!-- ⚠️ COMPANY PAYMENT FORM COMPLETELY REMOVED ⚠️ -->
+                <!-- No input fields, no buttons, no add payment function -->
 
-                <!-- Transactions Table - ONLY VIEW -->
+                <!-- Transactions Table -->
                 <h3 style="margin-bottom: 16px; font-size: 1.1rem;">📋 লেনদেনের ইতিহাস</h3>
                 <div class="table-responsive">
                     <table id="paymentsTable">
@@ -590,7 +965,7 @@
                     </table>
                 </div>
                 
-                <!-- Info Message - CLEAR INSTRUCTION -->
+                <!-- Info Message -->
                 <div class="info-message">
                     <i class="fas fa-info-circle"></i> 
                     <strong>শুধু দেখার জন্য:</strong> টাকা নেওয়ার কাজ অ্যাডমিন প্যানেল থেকে করতে হবে।
@@ -598,14 +973,14 @@
             </div>
         </div>
 
-        <!-- Footer -->
+        <!-- ============ FOOTER ============ -->
         <div class="footer">
-            <p>© ২০২৬ আমার কাজের হিসাব by OP Aminul FF</p>
-            <p style="opacity: 0.9; font-size: 0.8rem; margin-top: 8px;">📱 মোবাইল ফ্রেন্ডলি | শুধু দেখার জন্য</p>
+            <p style="margin-bottom: 8px;">© ২০২৬ আমার কাজের হিসাব by OP Aminul FF</p>
+            <p style="opacity: 0.9; font-size: 0.8rem;">📱 মোবাইল ফ্রেন্ডলি | শুধু দেখার জন্য</p>
         </div>
     </div>
 
-    <!-- Notification -->
+    <!-- ============ NOTIFICATION ============ -->
     <div class="notification" id="notification"></div>
 
     <script>
@@ -615,7 +990,7 @@
         const JSONBIN_MASTER_KEY = '$2a$10$mHHGr95EcBoKXe0lKcLWyu6PwXicvUb1BWMwjINoIpm1IPxLdtF1q';
         const JSONBIN_BIN_ID = '698c5c7743b1c97be97674e7';
         
-        // Products
+        // App Products & Rates
         const PRODUCTS = [
             { id: 'panjabi', name: 'প্যানজাবি', rate: 7, icon: 'fa-vest' },
             { id: 'shirt', name: 'শার্ট', rate: 5, icon: 'fa-tshirt' },
@@ -636,19 +1011,21 @@
                 location: 'ঢাকা, বাংলাদেশ',
                 agreementDays: 30,
                 agreementStart: '2024-01-01',
-                bio: 'পেশাদার লন্ড্রি বিশেষজ্ঞ'
+                bio: 'পেশাদার লন্ড্রি বিশেষজ্ঞ',
+                photoUrl: null
             },
             payments: [],
-            companyPayments: []
+            companyPayments: [],
+            offers: []
         };
 
-        // Initialize
+        // ============ INITIALIZE ============
         document.addEventListener('DOMContentLoaded', function() {
             loadData();
             startLiveProgress();
         });
 
-        // ============ JSONBin Functions ============
+        // ============ JSONBin FUNCTIONS ============
         async function loadData() {
             try {
                 const response = await fetch(`https://api.jsonbin.io/v3/b/${JSONBIN_BIN_ID}/latest`, {
@@ -659,59 +1036,246 @@
                     const data = await response.json();
                     appData = data.record;
                     if (!appData.companyPayments) appData.companyPayments = [];
+                    if (!appData.payments) appData.payments = [];
+                    if (!appData.profile) appData.profile = {};
+                    updateAllUI();
+                    showNotification('✅ ডাটা লোড হয়েছে');
+                } else {
+                    loadFromLocalStorage();
                 }
             } catch (error) {
-                const saved = localStorage.getItem('amarKajerHisab');
-                if (saved) appData = JSON.parse(saved);
+                console.error('Load error:', error);
+                loadFromLocalStorage();
             }
-            updateAllUI();
         }
 
-        // ============ Calculate Balance ============
+        function loadFromLocalStorage() {
+            const saved = localStorage.getItem('amarKajerHisab');
+            if (saved) {
+                appData = JSON.parse(saved);
+                if (!appData.companyPayments) appData.companyPayments = [];
+                if (!appData.payments) appData.payments = [];
+                if (!appData.profile) appData.profile = {};
+                updateAllUI();
+            }
+        }
+
+        // ============ CALCULATE BALANCE ============
         function calculateBalance() {
-            let earned = 0, paid = 0;
-            appData.entries.forEach(e => earned += e.total_amount || 0);
+            let totalEarned = 0;
+            appData.entries.forEach(entry => {
+                totalEarned += entry.total_amount || 0;
+            });
+            
+            let totalCompanyPaid = 0;
             if (appData.companyPayments) {
-                appData.companyPayments.forEach(p => paid += p.amount || 0);
+                appData.companyPayments.forEach(p => {
+                    totalCompanyPaid += p.amount || 0;
+                });
             }
-            return { earned, paid, balance: earned - paid };
+            
+            return {
+                earned: totalEarned,
+                paid: totalCompanyPaid,
+                balance: totalEarned - totalCompanyPaid
+            };
         }
 
-        // ============ UI Update ============
+        // ============ UPDATE ALL UI ============
         function updateAllUI() {
-            // Update stats
+            // Update Stats Cards
+            let totalAmount = 0, totalPieces = 0;
+            appData.entries.forEach(entry => {
+                totalAmount += entry.total_amount || 0;
+                totalPieces += entry.total_pieces || 0;
+            });
+
+            const totalDays = appData.entries.length;
+            const balance = calculateBalance();
+
+            document.getElementById('totalAmount').innerHTML = `৳${totalAmount.toLocaleString()}`;
+            document.getElementById('totalPieces').innerHTML = totalPieces.toLocaleString();
+            document.getElementById('totalDays').innerHTML = totalDays;
+            document.getElementById('currentBalance').innerHTML = `৳${balance.balance.toLocaleString()}`;
+            
+            // Update Payment Summary
+            document.getElementById('totalEarned').innerHTML = `৳${balance.earned.toLocaleString()}`;
+            document.getElementById('totalCompanyPaid').innerHTML = `৳${balance.paid.toLocaleString()}`;
+            document.getElementById('finalBalance').innerHTML = `৳${balance.balance.toLocaleString()}`;
+            
+            // Update all sections
+            updateRecentEntries();
+            updateProductsGrid();
+            updateProductsDetail();
+            updateFullHistory();
+            updateProfileUI();
+            updatePaymentsList();
+        }
+
+        // ============ UPDATE RECENT ENTRIES ============
+        function updateRecentEntries() {
+            const tbody = document.getElementById('recentEntriesBody');
+            const recentEntries = appData.entries.slice(0, 5);
+            
+            if (recentEntries.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="6" style="text-align: center; padding: 30px;">কোন এন্ট্রি নেই</td></tr>';
+                return;
+            }
+
+            let html = '';
+            recentEntries.forEach(entry => {
+                const date = new Date(entry.date);
+                html += `<tr>
+                    <td>${date.toLocaleDateString('bn-BD', {day: 'numeric', month: 'short'})}</td>
+                    <td>${entry.panjabi || 0}</td>
+                    <td>${entry.shirt || 0}</td>
+                    <td>${entry.drawjar || 0}</td>
+                    <td>${entry.total_pieces || 0}</td>
+                    <td>৳${(entry.total_amount || 0).toLocaleString()}</td>
+                </tr>`;
+            });
+            tbody.innerHTML = html;
+
+            if (appData.entries.length > 0) {
+                const lastDate = new Date(appData.entries[0].date);
+                document.getElementById('lastEntryDate').innerHTML = date.toLocaleDateString('bn-BD', {day: 'numeric', month: 'short'});
+                document.getElementById('yesterdayPieces').innerHTML = appData.entries[0].total_pieces || 0;
+            }
+        }
+
+        // ============ UPDATE PRODUCTS GRID ============
+        function updateProductsGrid() {
+            const container = document.getElementById('productsGrid');
+            
+            const totals = {};
+            PRODUCTS.forEach(p => { totals[p.id] = 0; });
+            
+            appData.entries.forEach(entry => {
+                PRODUCTS.forEach(p => {
+                    totals[p.id] += entry[p.id] || 0;
+                });
+            });
+
+            let html = '';
+            PRODUCTS.forEach(p => {
+                html += `<div class="product-card">
+                    <div class="product-icon"><i class="fas ${p.icon}"></i></div>
+                    <div class="product-name">${p.name}</div>
+                    <div class="product-rate">৳${p.rate}</div>
+                    <div class="product-total">${totals[p.id].toLocaleString()} পিস</div>
+                </div>`;
+            });
+            container.innerHTML = html;
+        }
+
+        // ============ UPDATE PRODUCTS DETAIL ============
+        function updateProductsDetail() {
+            const tbody = document.getElementById('productsDetailBody');
+            
+            const totals = {};
+            PRODUCTS.forEach(p => { totals[p.id] = 0; });
+            
+            appData.entries.forEach(entry => {
+                PRODUCTS.forEach(p => {
+                    totals[p.id] += entry[p.id] || 0;
+                });
+            });
+
+            const days = appData.entries.length || 1;
+            let html = '';
+            
+            PRODUCTS.forEach(p => {
+                const amount = totals[p.id] * p.rate;
+                const avg = Math.round(totals[p.id] / days);
+                html += `<tr>
+                    <td>${p.name}</td>
+                    <td>৳${p.rate}</td>
+                    <td>${totals[p.id].toLocaleString()}</td>
+                    <td>৳${amount.toLocaleString()}</td>
+                    <td>${avg} পিস</td>
+                </tr>`;
+            });
+
             let totalPieces = 0, totalAmount = 0;
             appData.entries.forEach(e => {
                 totalPieces += e.total_pieces || 0;
                 totalAmount += e.total_amount || 0;
             });
-            
-            document.getElementById('totalAmount').innerHTML = `৳${totalAmount.toLocaleString()}`;
-            document.getElementById('totalPieces').innerHTML = totalPieces.toLocaleString();
-            document.getElementById('totalDays').innerHTML = appData.entries.length;
-            
-            const balance = calculateBalance();
-            document.getElementById('currentBalance').innerHTML = `৳${balance.balance.toLocaleString()}`;
-            document.getElementById('totalEarned').innerHTML = `৳${balance.earned.toLocaleString()}`;
-            document.getElementById('totalCompanyPaid').innerHTML = `৳${balance.paid.toLocaleString()}`;
-            document.getElementById('finalBalance').innerHTML = `৳${balance.balance.toLocaleString()}`;
-            
-            // Update other sections
-            updatePaymentsList();
+
+            html += `<tr style="background: #f8f9fa; font-weight: 700;">
+                <td colspan="2">সর্বমোট</td>
+                <td>${totalPieces.toLocaleString()}</td>
+                <td>৳${totalAmount.toLocaleString()}</td>
+                <td>${days} দিন</td>
+            </tr>`;
+
+            tbody.innerHTML = html;
         }
 
-        // ============ Update Payments List - VIEW ONLY ============
+        // ============ UPDATE FULL HISTORY ============
+        function updateFullHistory() {
+            const tbody = document.getElementById('fullHistoryBody');
+            
+            if (appData.entries.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="9" style="text-align: center; padding: 30px;">কোন ডাটা নেই</td></tr>';
+                return;
+            }
+
+            let html = '';
+            appData.entries.forEach(entry => {
+                const date = new Date(entry.date);
+                html += `<tr>
+                    <td>${date.toLocaleDateString('bn-BD', {day: 'numeric', month: 'short'})}</td>
+                    <td>${entry.panjabi || 0}</td>
+                    <td>${entry.shirt || 0}</td>
+                    <td>${entry.panjabi_34_38 || 0}</td>
+                    <td>${entry.panjabi_20_30 || 0}</td>
+                    <td>${entry.panjabi_14_18 || 0}</td>
+                    <td>${entry.drawjar || 0}</td>
+                    <td>${entry.total_pieces || 0}</td>
+                    <td>৳${(entry.total_amount || 0).toLocaleString()}</td>
+                </tr>`;
+            });
+            tbody.innerHTML = html;
+        }
+
+        // ============ UPDATE PROFILE UI ============
+        function updateProfileUI() {
+            const p = appData.profile;
+            
+            document.getElementById('miniName').innerHTML = p.name || 'OP Aminul FF';
+            document.getElementById('miniCompany').innerHTML = p.company || 'লন্ড্রি সার্ভিস';
+            document.getElementById('profileName').innerHTML = p.name || 'OP Aminul FF';
+            document.getElementById('profileCompany').innerHTML = p.company || 'লন্ড্রি সার্ভিস';
+            document.getElementById('profileSkills').innerHTML = p.skills || 'লন্ড্রি, আয়রন';
+            document.getElementById('profileContact').innerHTML = p.contact || 'aminul@example.com';
+            document.getElementById('profileLocation').innerHTML = p.location || 'ঢাকা, বাংলাদেশ';
+            document.getElementById('agreementDays').innerHTML = `${p.agreementDays || 30} দিন`;
+            
+            if (p.agreementStart) {
+                const date = new Date(p.agreementStart);
+                document.getElementById('agreementStart').innerHTML = date.toLocaleDateString('bn-BD', {day: 'numeric', month: 'short', year: 'numeric'});
+            }
+            
+            document.getElementById('profileBio').innerHTML = p.bio || 'পেশাদার লন্ড্রি বিশেষজ্ঞ';
+            
+            if (p.photoUrl) {
+                document.getElementById('profileImage').src = p.photoUrl;
+            }
+        }
+
+        // ============ UPDATE PAYMENTS LIST - VIEW ONLY ============
         function updatePaymentsList() {
             const tbody = document.getElementById('paymentsBody');
-            let transactions = [];
+            let allTransactions = [];
             
-            // Add earnings
-            appData.entries.forEach(e => {
-                transactions.push({
-                    date: e.date,
+            // Add work earnings
+            appData.entries.forEach(entry => {
+                allTransactions.push({
+                    date: entry.date,
                     type: 'আয়',
-                    desc: `কাজের আয়`,
-                    amount: e.total_amount || 0,
+                    description: `কাজের আয় - ${entry.total_pieces || 0} পিস`,
+                    amount: entry.total_amount || 0,
                     color: '#10b981',
                     sign: '+'
                 });
@@ -720,10 +1284,10 @@
             // Add company payments
             if (appData.companyPayments) {
                 appData.companyPayments.forEach(p => {
-                    transactions.push({
+                    allTransactions.push({
                         date: p.date,
                         type: 'পরিশোধ',
-                        desc: 'কোম্পানি থেকে নেওয়া',
+                        description: 'কোম্পানি থেকে নেওয়া',
                         amount: p.amount || 0,
                         color: '#ef4444',
                         sign: '-'
@@ -731,41 +1295,98 @@
                 });
             }
             
-            // Sort by date
-            transactions.sort((a, b) => new Date(b.date) - new Date(a.date));
+            // Sort by date (newest first)
+            allTransactions.sort((a, b) => new Date(b.date) - new Date(a.date));
             
-            if (transactions.length === 0) {
+            if (allTransactions.length === 0) {
                 tbody.innerHTML = '<tr><td colspan="4" style="text-align: center; padding: 30px;">কোন লেনদেন নেই</td></tr>';
                 return;
             }
 
             let html = '';
-            transactions.slice(0, 10).forEach(t => {
+            allTransactions.slice(0, 10).forEach(t => {
                 const date = new Date(t.date);
                 html += `<tr>
                     <td>${date.toLocaleDateString('bn-BD', {day: 'numeric', month: 'short'})}</td>
                     <td><span style="background: ${t.color}; color: white; padding: 4px 12px; border-radius: 20px; font-size: 0.8rem;">${t.type}</span></td>
-                    <td>${t.desc}</td>
+                    <td>${t.description}</td>
                     <td style="color: ${t.color}; font-weight: 600;">${t.sign} ৳${t.amount.toLocaleString()}</td>
                 </tr>`;
             });
             tbody.innerHTML = html;
         }
 
-        // ============ Helper Functions ============
+        // ============ HELPER FUNCTIONS ============
         function showTab(tabId) {
             document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
             document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            
             event.target.classList.add('active');
             document.getElementById(tabId).classList.add('active');
         }
 
-        function startLiveProgress() {
-            // Progress bar function
+        function showNotification(message, type = 'success') {
+            const notif = document.getElementById('notification');
+            notif.innerHTML = message;
+            notif.className = 'notification';
+            if (type === 'error') notif.classList.add('error');
+            notif.classList.add('show');
+            setTimeout(() => notif.classList.remove('show'), 2500);
         }
 
-        // Global functions
+        function startLiveProgress() {
+            const updateProgress = () => {
+                if (appData.entries.length === 0) return;
+                
+                const lastEntry = appData.entries[0];
+                const yesterdayPieces = lastEntry.total_pieces || 0;
+                
+                const now = new Date();
+                const start = new Date(now).setHours(8, 0, 0);
+                const end = new Date(now).setHours(20, 0, 0);
+                
+                let progress = 0;
+                if (now >= start && now <= end) {
+                    progress = ((now - start) / (end - start)) * 100;
+                } else if (now > end) {
+                    progress = 100;
+                }
+                
+                const todayPieces = Math.round(yesterdayPieces * (progress / 100));
+                
+                document.getElementById('progressFill').style.width = `${progress}%`;
+                document.getElementById('progressPercent').innerHTML = `${Math.round(progress)}%`;
+                document.getElementById('todayProgress').innerHTML = `${todayPieces.toLocaleString()} / ${yesterdayPieces.toLocaleString()} পিস`;
+            };
+            
+            updateProgress();
+            setInterval(updateProgress, 60000);
+        }
+
+        function downloadCSV() {
+            if (appData.entries.length === 0) {
+                showNotification('কোন ডাটা নেই', 'error');
+                return;
+            }
+
+            let csv = 'Date,Panjabi,Shirt,34-38,20-30,14-18,Drawjar,Total Pieces,Total Amount\n';
+            appData.entries.forEach(e => {
+                csv += `${e.date},${e.panjabi || 0},${e.shirt || 0},${e.panjabi_34_38 || 0},${e.panjabi_20_30 || 0},${e.panjabi_14_18 || 0},${e.drawjar || 0},${e.total_pieces || 0},${e.total_amount || 0}\n`;
+            });
+
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `amar-kajer-hisab-${new Date().toISOString().split('T')[0]}.csv`;
+            a.click();
+            URL.revokeObjectURL(url);
+            showNotification('✅ CSV ডাউনলোড শুরু হয়েছে');
+        }
+
+        // Make functions global
         window.showTab = showTab;
+        window.downloadCSV = downloadCSV;
     </script>
 </body>
 </html>
